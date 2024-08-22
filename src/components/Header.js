@@ -10,7 +10,7 @@ const Header = () => {
                         <li>Room 1</li>
                         <li>Room 2</li>
                         <li>
-                            <button className="bg-gradient-to-r from-blue-600 to-blue-950 px-2 py-1 rounded-2xl">Add room +</button>
+                            <button className="bg-gradient-to-r from-blue-600 to-blue-950  shadow-md shadow-slate-800 px-2 py-1 rounded-2xl">Add room +</button>
                         </li>
                     </ul>
             </div>

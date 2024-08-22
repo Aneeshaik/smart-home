@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 const Right = () => {
     const [time, setTime] = useState(new Date().toLocaleTimeString('en-us', {hour12: false}));
-    const date = new Date().toLocaleDateString('en-us', {month: 'short', day: '2-digit'});
-    const day = new Date().toLocaleDateString('en-us', {weekday: 'short'})
+    const date = new Date().toLocaleDateString('en-us', {month: 'long', day: '2-digit'});
+    const day = new Date().toLocaleDateString('en-us', {weekday: 'long'})
     const [hours, minutes] = time.split(':')
     useEffect(() => {
             const timer = setInterval(() => {
@@ -13,9 +13,8 @@ const Right = () => {
         }, []);
 
     return (
-        <div className="backdrop-blur-3xl m-2 text-left bg-white/20 rounded-3xl text-white">
+        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-white">
             <div className="p-3">
-                <h1 className="font-semibold text-2xl">Today</h1>
                 <h1 className="font-semibold text-2xl">{hours} : {minutes}</h1>
                 <h1>{day}, {date}</h1>
             </div>
