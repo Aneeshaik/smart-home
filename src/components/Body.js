@@ -5,7 +5,7 @@ import Middle from "./Middle";
 const Body = () => {
     return(
         <div className="flex items-center justify-center min-h-screen">
-            <div className="backdrop-blur-lg bg-white/20 w-2/3 rounded-3xl">
+            <div className="backdrop-blur-3xl bg-black/30 w-2/3 rounded-3xl">
                 <Header />
                 <div className="flex justify-between">
                     <div className="w-1/3">

@@ -2,7 +2,7 @@ const Header = () => {
     return (
             <div className="flex justify-between items-center">
                     <h1 className="text-left text-white font-semibold text-3xl m-2">Welcome Anees!</h1>
-                    <ul className="backdrop-blur-lg bg-black/10 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
+                    <ul className="backdrop-blur-3xl bg-white/20 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
                         <li>Living room</li>
                         <li>Bed room</li>
                         <li>Kitchen</li>

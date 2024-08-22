@@ -4,5 +4,5 @@
 
 .custom-bg {
   @apply bg-cover bg-center min-h-screen;
-  background-image: url('../public/images/bg-image.jpg');
+  background-image: url('../src/assets/images/bg-image.jpg');
 }
