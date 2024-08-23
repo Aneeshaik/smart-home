@@ -22,7 +22,7 @@ const Right = () => {
         console.log(apiKey); // Ensure this logs the correct API key
     
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=${apiKey}&units=metric`);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=${apiKey}&units=metric`);
             const weatherData = await response.json();
             setWeatherData(weatherData);
             setLoading(false);
@@ -47,13 +47,22 @@ const Right = () => {
                 <div className="flex flex-col items-left justify-between">
                 <h1 className="text-xl">Weather</h1>
                 <div className="flex items-baseline">
-                    <h1 className="text-4xl">{weatherData.main.temp}&deg;</h1>
-                    <h1 className="">{weatherData.weather[0].description}</h1>
+                    {/* <h1 className="text-4xl">{weatherData.main.temp.toString().substring(0,2)}&deg;</h1>
+                    <h1 className="">{weatherData.weather[0].description}</h1> */}
+                    {weatherData.list.slice(0, 5).map((forecast, index) => (
+                        <div key={index} className="forecast-item">
+                            <h3>{new Date(forecast.dt * 1000).toLocaleString('en-us', {hour12: false})}</h3>
+                            <p>{forecast.main.temp.toFixed(1)}&deg;C</p>
+                            <p>{forecast.weather[0].description}</p>
+                        </div>
+                    ))}
+
+
                 </div>
                 </div>
-                <div className="items-center">
+                {/* <div className="items-center">
                     <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="weather-icon" />
-                </div>
+                </div> */}
             </div>
         </div>
         </div>
