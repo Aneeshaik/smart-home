@@ -103,37 +103,41 @@ const Right = () => {
         <div>
         <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-white">
             <div className="p-3">
-                <h1 className="font-semibold text-2xl">{hours} : {minutes}</h1>
-                <h1>{day}, {date}</h1>
+                <h1 className="text-left">Alerts</h1>
             </div>
         </div>
-        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-white">
-            <div className="text-left p-3 justify-between flex items-center">
-                <div className="flex flex-col items-left justify-between">
-                <h1 className="text-xl">Weather</h1>
-                <div className="items-baseline items-center">
-                    {/* <h1 className="text-4xl">{weatherData.main.temp.toString().substring(0,2)}&deg;</h1>
-                    <h1 className="">{weatherData.weather[0].description}</h1> */}
-                    {/* {weatherData.list.slice(0, 5).map((forecast, index) => (
-                        <div key={index} className="forecast-item">
-                            <h3>{new Date(forecast.dt * 1000).toLocaleString('en-us', {hour12: false})}</h3>
-                            <p>{forecast.main.temp.toFixed(1)}&deg;C</p>
-                            <p>{forecast.weather[0].description}</p>
-                        </div>
-                    ))} */}
+        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-left text-white">
+            <div className="p-3">
+                <h1 className="font-semibold text-2xl"><span className="text-4xl">{hours}</span> : {minutes}</h1>
+                <h1><span className="text-3xl">{day}</span>, {date}</h1>
+            </div>
+        </div>
+        <div className="weather-div backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-white">
+            <div className="p-3 items-center">
                     <div>
-                   {todayWeather && (<h1>{todayWeather.main.temp.toFixed(0)}&deg;C</h1>)} 
+                   {todayWeather && (
+                        <div className="h-min">
+                        <h1 className="text-xl text-left">Weather</h1>
+                            <div className="flex justify-between items-center h-12">
+                            <h1><span className="text-4xl">{todayWeather.main.temp.toFixed(0)}&deg;</span>C</h1>
+                            <img src={`https://openweathermap.org/img/wn/${todayWeather.weather[0].icon}@2x.png`} alt="weather-icon"/>
+                            </div>
+                        </div>
+                    )} 
+                   
+                   </div>
+                   <div className="flex justify-between mt-2">
+                        <h1 className="text-lg">Forecast</h1>
+                        <h1 className="text-sm">Next 4 days</h1>
                    </div>
                    <div className="flex items-center">
                     {upcomingWeather.map((forecast, index) => (
-                        <div key={index} className="forecast-item space-x-2 items-center">
+                        <div key={index} className="bg-white/20 m-2 p-1 rounded-3xl forecast-item items-center">
                             <h1>{new Date(forecast.dt * 1000).toLocaleDateString('en-us', { weekday: 'short' })}</h1>
+                            <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather-icon"/>
                             <p>{forecast.main.temp.toFixed(0)}&deg;C</p>
-                            <p>{forecast.weather[0].description}</p>
                         </div>
                     ))}
-                    </div>
-                </div>
                 </div>
                 {/* <div className="items-center">
                     <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="weather-icon" />

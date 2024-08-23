@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### just to keep previous code
+
+                   {/* <h1 className="text-4xl">{weatherData.main.temp.toString().substring(0,2)}&deg;</h1>
+                    <h1 className="">{weatherData.weather[0].description}</h1> */}
+                    {/* {weatherData.list.slice(0, 5).map((forecast, index) => (
+                        <div key={index} className="forecast-item">
+                            <h3>{new Date(forecast.dt * 1000).toLocaleString('en-us', {hour12: false})}</h3>
+                            <p>{forecast.main.temp.toFixed(1)}&deg;C</p>
+                            <p>{forecast.weather[0].description}</p>
+                        </div>
+                    ))} */}
