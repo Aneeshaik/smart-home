@@ -2,6 +2,7 @@ import Header from "./Header";
 import Right from "./Right";
 import Left from "./Left";
 import Middle from "./Middle";
+
 const Body = () => {
     return(
         <div className="flex items-center justify-center min-h-screen">
