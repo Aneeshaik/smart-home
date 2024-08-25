@@ -7,7 +7,6 @@ const Weather = (props) => {
     const [upcomingWeather, setUpcomingWeather] = useState([]);
     const [loading, setLoading] = useState(true);
     const [locationData, setLocationData] = useState(null)
-    const [translatedText, setTranslatedText] = useState();
     const location = props.location;
 
     const getTodayForecast = useCallback(() => {
@@ -38,7 +37,6 @@ const Weather = (props) => {
         }
     }, [weatherData.list]);
 
-    console.log(location);
     
     // Function to get weather for the upcoming days at a specific time (e.g., 12:00 PM)
     const getUpcomingDaysForecasts = useCallback(() => {
@@ -64,7 +62,7 @@ const Weather = (props) => {
         }
     }, [weatherData.list]);
 
-    const fetchData = useCallback(async() =>{
+    const fetchData = useCallback(async() => {
             const apiKey = process.env.REACT_APP_YOUR_API_KEY;
         
             try {
@@ -73,44 +71,19 @@ const Weather = (props) => {
                 const data = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${location.lat}&lon=${location.lon}&format=json`)
                 const jsonData = await data.json();
                 setLocationData(jsonData);
-                setWeatherData(weatherData);
-                
+                setWeatherData(weatherData);      
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
             }
-            
-            try {
-                const response = await fetch('https://libretranslate.com/translate', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    q: `${locationData.address.town}`,
-                    source: 'auto',
-                    target: 'en',
-                    format: 'text',
-                  }),
-                });
-          
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-          
-                const data = await response.json();
-                setTranslatedText(data.translatedText);
-              } catch (error) {
-                console.error('Translation error:', error);
-              }
-
-    },[location, locationData]) 
+    },[location]) 
 
 
     useEffect(() => { 
         fetchData();
+        console.log(location);
         setInterval(fetchData, 10 * 60 * 1000)
-    },[fetchData, locationData])
+    },[fetchData, locationData, location])
 
     useEffect(() => {
         if(!loading){
@@ -122,14 +95,14 @@ const Weather = (props) => {
 
     return loading? null : (
         <div className="weather-div backdrop-blur-3xl m-2 bg-white/20 z-10 rounded-3xl text-white">
-        {(todayWeather )&& (upcomingWeather) &&(locationData) && (
+        {(todayWeather )&& (upcomingWeather) && (locationData) && (
             <div className="p-3 items-center">
                     <div>
                         <div className="h-min">
                         <h1 className="text-xl text-left font-semibold">Weather</h1>
                         <div className="flex opacity-50 text-sm ml-[-6px]">
                         <img className="scale-75" src={locationIcon} alt="location"/>
-                        <h1  className="text-sm">{locationData.address.city || translatedText}, {locationData.address.state}</h1>
+                        <h1  className="text-sm">{locationData.address?.city || locationData.address?.town || locationData.address?.suburb}, {locationData.address?.state}</h1>
                         </div>
                             <div className="flex justify-between items-center h-12 my-4">
                             <h1><span className="text-4xl">{todayWeather.main.temp.toFixed(0)}&deg;</span>C</h1>

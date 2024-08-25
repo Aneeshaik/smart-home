@@ -12,7 +12,7 @@
 }
 
 .react-calendar {
-  @apply rounded-2xl bg-gradient-to-r from-transparent to-[#000046];
+  @apply rounded-2xl bg-gradient-to-r from-[#1CB5E0] to-[#000046];
   /* background-color: black; */
   filter: blur();
   width: 350px;
