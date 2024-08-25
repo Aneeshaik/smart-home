@@ -63,7 +63,7 @@ const Weather = (props) => {
     }, [weatherData.list]);
 
     const fetchData = useCallback(async() => {
-            const apiKey = process.env.REACT_APP_YOUR_API_KEY;
+            const apiKey = process.env.REACT_APP_YOUR_OPEN_WEATHER_API_KEY;
         
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=metric`);
@@ -105,7 +105,7 @@ const Weather = (props) => {
                         <h1  className="text-sm">{locationData.address?.city || locationData.address?.town || locationData.address?.suburb}, {locationData.address?.state}</h1>
                         </div>
                             <div className="flex justify-between items-center h-12 my-4">
-                            <h1><span className="text-4xl">{todayWeather.main.temp.toFixed(0)}&deg;</span>C</h1>
+                            <h1 className="text-2xl"><span className="text-[45px]">{todayWeather.main.temp.toFixed(0)}&deg;</span>C</h1>
                             <img className="scale-150" src={`https://openweathermap.org/img/wn/${todayWeather.weather[0].icon}@2x.png`} alt="weather-icon"/>
                             </div>
                         </div>          

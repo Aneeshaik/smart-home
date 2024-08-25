@@ -1,37 +1,14 @@
-import { useState, useEffect } from "react";
-import Weather from "./Weather";
 import News from "./News";
 
 const Right = () => {
-    const [location, setLocation] = useState({ lat: null, lon: null });
-
-    useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setLocation({
-                        lat: position.coords.latitude,
-                        lon: position.coords.longitude,
-                    });
-                },
-                (error) => {
-                    console.error(error.message);       
-                }
-            );
-        } else {
-            console.error( "Geolocation is not supported by your browser");
-        }
-    }, []);
-    
-
     return (
         <div>
-        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-white">
-            <div className="p-3">
-                <h1 className="text-left">Alerts</h1>
-            </div>
+        <div className="backdrop-blur-3xl m-2 p-3 bg-white/20 rounded-3xl text-white">
+            <h1 className="text-left">Alerts</h1>
         </div>
-        <Weather location={location}/>
+        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl">
+                <h1 className="">Electric Usage</h1>
+        </div>
         <News />
         </div>
     )
