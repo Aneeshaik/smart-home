@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
+import locationIcon from "../assets/images/location-icon.svg"
 
 const Weather = (props) => {
     const [weatherData, setWeatherData] = useState({});
     const [todayWeather, setTodayWeather] = useState(null);
     const [upcomingWeather, setUpcomingWeather] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [locationData, setLocationData] = useState(null)
     const location = props.location;
 
     const getTodayForecast = useCallback(() => {
@@ -46,9 +48,6 @@ const Weather = (props) => {
             day: '2-digit',
         });
     
-        console.log('Current Date:', currentDate);
-        console.log('Weather Data List:', weatherData.list);
-    
         const upcomingDaysForecasts = weatherData.list
             .filter((forecast) => {
                 const forecastDate = new Date(forecast.dt * 1000).toLocaleDateString('en-us', {
@@ -56,15 +55,10 @@ const Weather = (props) => {
                     month: '2-digit',
                     day: '2-digit',
                 });
-                console.log('Forecast Date:', forecastDate);
-                console.log(new Date(forecast.dt * 1000).getHours());
                 
                 return forecastDate !== currentDate && new Date(forecast.dt * 1000).getHours() === 11;
             })
             .slice(0, 4);
-            
-    
-        console.log('Upcoming Days Forecasts:', upcomingDaysForecasts);
         setUpcomingWeather(upcomingDaysForecasts);
         }
     }, [weatherData.list]);
@@ -77,7 +71,15 @@ const Weather = (props) => {
             try {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&units=metric`);
                 const weatherData = await response.json();
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${location.lat}&lon=${location.lon}&format=json`)
+                .then(response => {
+                    if(response.ok) return response.json();
+                })
+                .then(data => {
+                    setLocationData(data)
+                })
                 setWeatherData(weatherData);
+                
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
@@ -96,28 +98,30 @@ const Weather = (props) => {
 
     return loading? null : (
         <div className="weather-div backdrop-blur-3xl m-2 bg-white/20 z-10 rounded-3xl text-white">
+        {(todayWeather )&& (upcomingWeather) && (
             <div className="p-3 items-center">
                     <div>
-                   {todayWeather && (
                         <div className="h-min">
                         <h1 className="text-xl text-left">Weather</h1>
+                        <div className="flex opacity-50 text-sm ml-[-6px]">
+                        <img className="scale-75" src={locationIcon} alt="location"/>
+                        <h1  className="text-sm">{locationData.address.city || locationData.address.town}, {locationData.address.state}</h1>
+                        </div>
                             <div className="flex justify-between items-center h-12">
                             <h1><span className="text-4xl">{todayWeather.main.temp.toFixed(0)}&deg;</span>C</h1>
                             <img src={`https://openweathermap.org/img/wn/${todayWeather.weather[0].icon}@2x.png`} alt="weather-icon"/>
                             </div>
-                        </div>
-                    )} 
-                   
+                        </div>          
                    </div>
                    <div className="flex justify-between mt-2 items-baseline">
                         <h1 className="text-lg">Forecast</h1>
                         <h1 className="text-sm">Next 4 days</h1>
                    </div>
                    <div className="flex items-center">
-                    {upcomingWeather && upcomingWeather.map((forecast, index) => (
+                    {upcomingWeather.map((forecast, index) => (
                         <div key={index} className="bg-white/20 m-2 p-1 rounded-2xl forecast-item items-center">
                             <h1>{new Date(forecast.dt * 1000).toLocaleDateString('en-us', { weekday: 'short' })}</h1>
-                            <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather-icon"/>
+                            <img src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`} alt="weather-icon"/> 
                             <p>{forecast.main.temp.toFixed(0)}&deg;C</p>
                         </div>
                     ))}
@@ -126,6 +130,7 @@ const Weather = (props) => {
                     <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="weather-icon" />
                 </div> */}
             </div>
+        )}
         </div>
     )
 }
