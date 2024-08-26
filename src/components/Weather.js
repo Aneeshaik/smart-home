@@ -62,7 +62,7 @@ const Weather = (props) => {
         }
     }, [weatherData.list]);
 
-    const fetchData = useCallback(async() => {
+    const fetchData =  useCallback(async() => {
             const apiKey = process.env.REACT_APP_YOUR_OPEN_WEATHER_API_KEY;
         
             try {

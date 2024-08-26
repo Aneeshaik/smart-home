@@ -1,6 +1,7 @@
 import Time from "./Time"
 import { useState, useEffect } from "react";
 import Weather from "./Weather";
+import News from "./News";
 
 const Left = () => {
     const [location, setLocation] = useState({ lat: null, lon: null });
@@ -25,6 +26,7 @@ const Left = () => {
     return (
         <div className="">
             <Time />
+            <News />
             <Weather location={location} />
         </div>
     )

@@ -56,7 +56,7 @@ const News = () => {
     // </div>
 
 <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl flex justify-center items-center">
-  <Carousel className="w-full rounded-3xl">
+  <Carousel className="w-full" controls={false} indicators={false}>
     <Carousel.Item interval={1000}>
       <div className="relative w-full h-[150px] rounded-3xl">
         <img
@@ -64,33 +64,33 @@ const News = () => {
           alt="news-image"
           className="w-full h-[150px] object-cover rounded-3xl"
         />
-        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 bg-black text-white p-2 text-left">
+        <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
           <h3 className='text-xl'>First slide label</h3>
           {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
         </div>
       </div>
     </Carousel.Item>
-    <Carousel.Item interval={500}>
+    <Carousel.Item interval={2*1000}>
       <div className="relative w-full h-[150px] rounded-3xl">
         <img
           src={NewsImage}
           alt="news-image"
           className="w-full h-[150px] object-cover rounded-3xl"
         />
-        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 bg-black text-white p-2 text-left">
+        <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
           <h3 className='text-xl'>Second slide label</h3>
           {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
         </div>
       </div>
     </Carousel.Item>
-    <Carousel.Item>
+    <Carousel.Item interval={2*1000}>
       <div className="relative w-full h-[150px] rounded-3xl">
         <img
           src={NewsImage}
           alt="news-image"
           className="w-full h-[150px] object-cover rounded-3xl"
         />
-        <div className="absolute inset-x-0 bottom-0 bg-opacity-50 bg-black text-white p-2 text-center">
+        <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
           <h3 className='text-xl'>Third slide label</h3>
           {/* <p className='leading-tight'>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> */}
         </div>
