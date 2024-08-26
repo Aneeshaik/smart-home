@@ -1,5 +1,3 @@
-import News from "./News";
-
 const Right = () => {
     return (
         <div>
@@ -7,9 +5,11 @@ const Right = () => {
             <h1 className="text-left">Alerts</h1>
         </div>
         <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl">
-                <h1 className="">Electric Usage</h1>
+            <h1 className="">Electric Usage</h1>
         </div>
-        <News />
+        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl">
+            <h1>Air Conditioner</h1>
+        </div>
         </div>
     )
 }
