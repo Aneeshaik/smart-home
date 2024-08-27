@@ -6,7 +6,7 @@ import BgOne from "./styled-components/BgOne";
 
 const Body = () => {
     return(
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center min-h-screen text-white">
             <BgOne>
                 <Header />
                 <div className="flex justify-between">

@@ -24,8 +24,9 @@ const AirConditioner = () => {
                     <div className="w-2 h-2 bg-green-500 rounded-full shadow-green-500 shadow-2xl animate-pulse"></div>
                     <h1 className="text-white">Air Conditioner</h1>
                 </div>
-                <img src={powerIcon} alt="power-icon" />
+                <img className="cursor-pointer" src={powerIcon} alt="power-icon" />
             </div>
+            <div className="flex">
             <div className="m-3">
             <div className="relative w-56 h-56 mx-auto">
                 <CircularProgressbar
@@ -53,12 +54,12 @@ const AirConditioner = () => {
                     strokeWidth={5}
                     />
             </div>
-            <div className="flex justify-between mx-16 mt-[-40px]">
+            <div className="flex justify-between mx-12 mt-[-40px]">
                 <img className="p-2 rounded-full bg-slate-300" src={minusIcon} alt="minus" />
                 <img className="p-2 rounded-full bg-slate-300" src={plusIcon} alt="plus" />
             </div>
             </div>
-            <div className="flex justify-between mx-8">
+            <div className="flex flex-col justify-between my-4">
                 <div className="flex flex-col items-center text-white">
                     <img className="mb-1" src={fanIcon} alt="fan" />
                     <h1>Fan Speed</h1>
@@ -71,6 +72,7 @@ const AirConditioner = () => {
                     <img className="mb-1" src={normalIcon} alt="normal" />
                     <h1>Mode</h1>
                 </div>
+            </div>
             </div>
         </BgTwo>
     )
