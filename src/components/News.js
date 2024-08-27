@@ -21,41 +21,7 @@ const News = () => {
     // }
 
   return (
-    // <div className="backdrop-blur-3xl m-2 bg-white/20 items-center rounded-3xl">
-    // <Carousel>
-    //   <Carousel.Item interval={1000}>
-    //   <div className='h-[150px] w-full rounded-3xl'>
-    //   <img className="absolute inset-0 object-cover w-full h-full rounded-3xl" src={NewsImage} alt='news-image' />
-    //     <Carousel.Caption>
-    //       <h3>First slide label</h3>
-    //       <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    //     </Carousel.Caption>
-    //     </div>
-    //   </Carousel.Item>
-    //   <Carousel.Item interval={500}>
-    //   <div className='h-[150px] w-full rounded-3xl'>
-    //   <img className="absolute inset-0 object-cover w-full h-full rounded-3xl" src={NewsImage} alt='news-image' />
-    //     <Carousel.Caption>
-    //       <h3>Second slide label</h3>
-    //       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    //     </Carousel.Caption>
-    //     </div>
-    //   </Carousel.Item>
-    //   <Carousel.Item>
-    //   <div className='h-[150px] w-full rounded-3xl'>
-    //   <img className="absolute inset-0 object-cover w-full h-full rounded-3xl" src={NewsImage} alt='news-image' />
-    //     <Carousel.Caption>
-    //       <h3>Third slide label</h3>
-    //       <p>
-    //         Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-    //       </p>
-    //     </Carousel.Caption>
-    //     </div>
-    //   </Carousel.Item>
-    // </Carousel>
-    // </div>
-
-<div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl flex justify-center items-center">
+<div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl">
   <Carousel className="w-full" controls={false} indicators={false}>
     <Carousel.Item interval={1000}>
       <div className="relative w-full h-[150px] rounded-3xl">
