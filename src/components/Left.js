@@ -24,10 +24,16 @@ const Left = () => {
         }
     }, []);
     return (
-        <div className="">
-            <Time />
-            <News />
-            <Weather location={location} />
+        <div className="h-[80vh] m-2">
+            <div className="">
+                <Time />
+            </div>
+            <div className="">
+                <News />
+            </div>
+            <div className="h-[60vh] overflow-hidden">
+                <Weather location={location} />
+            </div>
         </div>
     )
 }

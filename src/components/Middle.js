@@ -5,6 +5,9 @@ import doorIcon from "../assets/images/door-icon.svg"
 import cameraIcon from "../assets/images/camera-icon.svg"
 import { useState, useEffect } from "react"
 import Switch from "react-switch"
+import lightIcon from "../assets/images/light-icon.svg"
+import fanIcon from "../assets/images/fan-grey-icon.svg"
+import tvIcon from "../assets/images/tv-icon.svg"
 
 
 const Middle = () => {
@@ -89,7 +92,166 @@ const Middle = () => {
             </div>
         </BgTwo>
         </div>
-
+        <div className="flex my-3">
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+            <div className="flex justify-between space-x-7 items-center">
+                <img className="p-2 bg-white rounded-full scale-75" src={lightIcon} alt="light" />
+                <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
+            </div>
+            <div className="py-1 flex flex-col m-1 space-y-1">
+            <h1>Light</h1>
+            <div className="flex space-y-1 items-center">
+            <Switch
+                checked={checked}
+                onChange={handleChange}
+                onColor="#86d3ff"       // Background color when the switch is on
+                onHandleColor="#2693e6"  // Handle color when the switch is on
+                offColor="#ffffff"       // Background color when the switch is off (white)
+                offHandleColor="#dddddd" // Handle color when the switch is off (light gray)
+                handleDiameter={15}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                height={20}
+                width={35}
+            />
+            </div>
+            </div>
+        </BgTwo>
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+            <div className="flex justify-between space-x-7 items-center">
+                <img className="p-2 bg-white rounded-full scale-75" src={fanIcon} alt="camera" />
+                <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
+            </div>
+            <div className="py-1 flex flex-col m-1 space-y-1">
+            <h1>Fan</h1>
+            <div className="flex space-y-1 items-center">
+            <Switch
+                checked={checked}
+                onChange={handleChange}
+                onColor="#86d3ff"       // Background color when the switch is on
+                onHandleColor="#2693e6"  // Handle color when the switch is on
+                offColor="#ffffff"       // Background color when the switch is off (white)
+                offHandleColor="#dddddd" // Handle color when the switch is off (light gray)
+                handleDiameter={15}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                height={20}
+                width={35}
+            />
+            </div>
+            </div>
+        </BgTwo>
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+            <div className="flex justify-between space-x-7 items-center">
+                <img className="p-2 bg-white rounded-full scale-75" src={tvIcon} alt="Tv" />
+                <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
+            </div>
+            <div className="py-1 flex flex-col m-1 space-y-1">
+            <h1>TV</h1>
+            <div className="flex space-y-1 items-center">
+            <Switch
+                checked={checked}
+                onChange={handleChange}
+                onColor="#86d3ff"       // Background color when the switch is on
+                onHandleColor="#2693e6"  // Handle color when the switch is on
+                offColor="#ffffff"       // Background color when the switch is off (white)
+                offHandleColor="#dddddd" // Handle color when the switch is off (light gray)
+                handleDiameter={15}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                height={20}
+                width={35}
+            />
+            </div>
+            </div>
+        </BgTwo>
+        </div>
+        <div className="flex">
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+            <div className="flex justify-between space-x-7 items-center">
+                <img className="p-2 bg-white rounded-full scale-75" src={lightIcon} alt="light" />
+                <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
+            </div>
+            <div className="py-1 flex flex-col m-1 space-y-1">
+            <h1>Light</h1>
+            <div className="flex space-y-1 items-center">
+            <Switch
+                checked={checked}
+                onChange={handleChange}
+                onColor="#86d3ff"       // Background color when the switch is on
+                onHandleColor="#2693e6"  // Handle color when the switch is on
+                offColor="#ffffff"       // Background color when the switch is off (white)
+                offHandleColor="#dddddd" // Handle color when the switch is off (light gray)
+                handleDiameter={15}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                height={20}
+                width={35}
+            />
+            </div>
+            </div>
+        </BgTwo>
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+            <div className="flex justify-between space-x-7 items-center">
+                <img className="p-2 bg-white rounded-full scale-75" src={fanIcon} alt="camera" />
+                <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
+            </div>
+            <div className="py-1 flex flex-col m-1 space-y-1">
+            <h1>Fan</h1>
+            <div className="flex space-y-1 items-center">
+            <Switch
+                checked={checked}
+                onChange={handleChange}
+                onColor="#86d3ff"       // Background color when the switch is on
+                onHandleColor="#2693e6"  // Handle color when the switch is on
+                offColor="#ffffff"       // Background color when the switch is off (white)
+                offHandleColor="#dddddd" // Handle color when the switch is off (light gray)
+                handleDiameter={15}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                height={20}
+                width={35}
+            />
+            </div>
+            </div>
+        </BgTwo>
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+            <div className="flex justify-between space-x-7 items-center">
+                <img className="p-2 bg-white rounded-full scale-75" src={cameraIcon} alt="camera" />
+                <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
+            </div>
+            <div className="py-1 flex flex-col m-1 space-y-1">
+            <h1>Camera</h1>
+            <div className="flex space-y-1 items-center">
+            <Switch
+                checked={checked}
+                onChange={handleChange}
+                onColor="#86d3ff"       // Background color when the switch is on
+                onHandleColor="#2693e6"  // Handle color when the switch is on
+                offColor="#ffffff"       // Background color when the switch is off (white)
+                offHandleColor="#dddddd" // Handle color when the switch is off (light gray)
+                handleDiameter={15}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                height={20}
+                width={35}
+            />
+            </div>
+            </div>
+        </BgTwo>
+        </div>
         </div>
         </div>
     )

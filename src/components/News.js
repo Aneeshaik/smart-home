@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import NewsImage from '../assets/images/news-image.jpeg';
+import BgTwo from './styled-components/BgTwo';
 
 const News = () => {
     // const [newsData, setNewsData] = useState([]);
@@ -21,49 +22,49 @@ const News = () => {
     // }
 
   return (
-<div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl">
-  <Carousel className="w-full" controls={false} indicators={false}>
-    <Carousel.Item interval={1000}>
-      <div className="relative w-full h-[150px] rounded-3xl">
-        <img
-          src={NewsImage}
-          alt="news-image"
-          className="w-full h-[150px] object-cover rounded-3xl"
-        />
-        <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
-          <h3 className='text-xl'>First slide label</h3>
-          {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
-        </div>
-      </div>
-    </Carousel.Item>
-    <Carousel.Item interval={2*1000}>
-      <div className="relative w-full h-[150px] rounded-3xl">
-        <img
-          src={NewsImage}
-          alt="news-image"
-          className="w-full h-[150px] object-cover rounded-3xl"
-        />
-        <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
-          <h3 className='text-xl'>Second slide label</h3>
-          {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
-        </div>
-      </div>
-    </Carousel.Item>
-    <Carousel.Item interval={2*1000}>
-      <div className="relative w-full h-[150px] rounded-3xl">
-        <img
-          src={NewsImage}
-          alt="news-image"
-          className="w-full h-[150px] object-cover rounded-3xl"
-        />
-        <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
-          <h3 className='text-xl'>Third slide label</h3>
-          {/* <p className='leading-tight'>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> */}
-        </div>
-      </div>
-    </Carousel.Item>
-  </Carousel>
-</div>
+        <BgTwo className='h-[20vh]'>
+          <Carousel className="w-full" controls={false} indicators={false}>
+            <Carousel.Item interval={1000}>
+              <div className="relative w-full h-[150px] rounded-3xl">
+                <img
+                  src={NewsImage}
+                  alt="news-image"
+                  className="w-full h-[150px] object-cover rounded-3xl"
+                />
+                <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
+                  <h3 className='text-xl'>First slide label</h3>
+                  {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+                </div>
+              </div>
+            </Carousel.Item>
+            <Carousel.Item interval={2*1000}>
+              <div className="relative w-full h-[150px] rounded-3xl">
+                <img
+                  src={NewsImage}
+                  alt="news-image"
+                  className="w-full h-[150px] object-cover rounded-3xl"
+                />
+                <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
+                  <h3 className='text-xl'>Second slide label</h3>
+                  {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
+                </div>
+              </div>
+            </Carousel.Item>
+            <Carousel.Item interval={2*1000}>
+              <div className="relative w-full h-[150px] rounded-3xl">
+                <img
+                  src={NewsImage}
+                  alt="news-image"
+                  className="w-full h-[150px] object-cover rounded-3xl"
+                />
+                <div className="absolute inset-x-0 bottom-0 text-white p-2 rounded-3xl text-left">
+                  <h3 className='text-xl'>Third slide label</h3>
+                  {/* <p className='leading-tight'>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p> */}
+                </div>
+              </div>
+            </Carousel.Item>
+          </Carousel>
+        </BgTwo>
 
 
 
