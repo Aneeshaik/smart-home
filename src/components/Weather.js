@@ -94,7 +94,7 @@ const Weather = (props) => {
 
 
     return loading? null : (
-        <div className="weather-div backdrop-blur-3xl m-1 bg-white/20 h-[40vh] z-10 rounded-3xl text-white">
+        <div className="weather-div backdrop-blur-3xl m-1 bg-white/20 z-10 overflow-auto rounded-3xl text-white">
         {(todayWeather )&& (upcomingWeather) && (locationData) && (
             <div className="p-3 items-center">
                     <div>

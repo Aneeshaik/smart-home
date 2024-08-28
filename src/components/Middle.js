@@ -30,16 +30,16 @@ const Middle = () => {
             <img className="rounded-3xl p-2" src={livingRoom} alt="living room" />
         </BgTwo>
         </div>
-        <div>
+        <div className="">
         <div className="flex">
-        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start space-y-4 justify-between m-1">
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between m-1">
             <img className="p-2 bg-white rounded-full scale-75" src={wifiIcon} alt="wifi" />
             <div className="p-2 text-left"> 
                 <h1 className="font-medium">Internet</h1>
                 <h1 className="text-[11px] opacity-75">{internetSpeed} Mbit/s</h1>
             </div>
         </BgTwo>
-        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between m-1">
             <div>
             <img className="p-2 bg-white rounded-full scale-75" src={doorIcon} alt="door" />
             </div>
@@ -65,7 +65,7 @@ const Middle = () => {
             </div>
         </div>
         </BgTwo>
-        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
+        <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between m-1">
             <div className="flex justify-between space-x-7 items-center">
                 <img className="p-2 bg-white rounded-full scale-75" src={cameraIcon} alt="camera" />
                 <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
@@ -92,7 +92,7 @@ const Middle = () => {
             </div>
         </BgTwo>
         </div>
-        <div className="flex my-3">
+        <div className="flex">
         <BgTwo className="w-1/3 h-[120px] p-1 flex flex-col items-start justify-between space-y-4 m-1">
             <div className="flex justify-between space-x-7 items-center">
                 <img className="p-2 bg-white rounded-full scale-75" src={lightIcon} alt="light" />
@@ -125,7 +125,7 @@ const Middle = () => {
                 <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
             </div>
             <div className="py-1 flex flex-col m-1 space-y-1">
-            <h1>Fan</h1>
+            <h1 className="text-left">Fan</h1>
             <div className="flex space-y-1 items-center">
             <Switch
                 checked={checked}
@@ -151,7 +151,7 @@ const Middle = () => {
                 <span className="opacity-50">{checked ? 'On' : 'Off'}</span>
             </div>
             <div className="py-1 flex flex-col m-1 space-y-1">
-            <h1>TV</h1>
+            <h1 className="text-left">TV</h1>
             <div className="flex space-y-1 items-center">
             <Switch
                 checked={checked}
