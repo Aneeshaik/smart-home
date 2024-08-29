@@ -24,14 +24,14 @@ const Left = () => {
         }
     }, []);
     return (
-        <div className="h-[100vh]">
-            <div className="">
+        <div className="flex flex-col h-full box-border">
+            <div className="box-border">
                 <Time />
             </div>
-            <div className="">
+            <div className="box-border overflow-auto">
                 <News />
             </div>
-            <div className="h-[37vh] m-1 mt-2 backdrop-blur-3xl bg-white/20 rounded-3xl flex items-center justify-center overflow-hidden">
+            <div className="box-border backdrop-blur-3xl bg-white/20 rounded-3xl overflow-auto">
                 <Weather location={location} />
             </div>
         </div>

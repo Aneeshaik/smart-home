@@ -6,13 +6,14 @@ import BgTwo from "./styled-components/BgTwo";
 const Right = () => {
       
     return (
-        <div className="h-[100vh]">
-        <div className="backdrop-blur-3xl m-2 p-3 bg-white/20 rounded-3xl text-white">
+        <div className="flex flex-col h-full box-border">
+        <div className="backdrop-blur-3xl p-3 box-border bg-white/20 rounded-3xl text-white overflow-auto">
             <h1 className="text-left">Alerts</h1>
         </div>
-        <div></div>
+        <div className="box-border overflow-auto">
         <AirConditioner />
-        <BgTwo className="h-[28vh] mt-2">
+        </div>
+        <BgTwo className="box-border overflow-auto">
             <Electricity  />
         </BgTwo>
         </div>

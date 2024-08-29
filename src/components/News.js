@@ -22,7 +22,7 @@ const News = () => {
     // }
 
   return (
-        <BgTwo className='h-[20vh]'>
+        <BgTwo className=''>
           <Carousel className="w-full" controls={false} indicators={false}>
             <Carousel.Item interval={1000}>
               <div className="relative w-full h-[150px] rounded-3xl">
