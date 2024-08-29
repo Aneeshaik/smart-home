@@ -24,7 +24,7 @@ const Time = () => {
 
 
     return (
-        <div className="backdrop-blur-3xl m-2 bg-white/20 rounded-3xl text-white">
+        <div className="backdrop-blur-3xl m-2 bg-white/20 relative z-20 rounded-3xl text-white">
         <div className="">
             <div className="p-3 flex justify-between">
                 <div className="text-left">

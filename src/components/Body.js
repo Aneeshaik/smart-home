@@ -7,16 +7,16 @@ import BgOne from "./styled-components/BgOne";
 const Body = () => {
     return(
         <div className="flex items-center justify-center min-h-screen text-white">
-            <BgOne className="h-[90vh] flex flex-col box-border">
+            <BgOne className="">
                 <Header />
-                <div className="flex justify-between box-border flex-1">
-                    <div className="w-1/3 h-full overflow-hidden box-border">
+                <div className="flex justify-between">
+                    <div className="w-1/3 h-fullr">
                         <Left />
                     </div>
-                    <div className="w-1/3 h-full overflow-hidden box-border">
+                    <div className="w-1/3 h-full">
                         <Middle />
                     </div>
-                    <div className="w-1/3 h-full overflow-hidden box-border">
+                    <div className="w-1/3 h-full">
                         <Right />
                     </div>
                 </div>
