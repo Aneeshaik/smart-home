@@ -31,7 +31,7 @@ const Left = () => {
             <div className="">
                 <News />
             </div>
-            <div className="h-[37vh] overflow-hidden m-1 mt-2 backdrop-blur-3xl bg-white/20 rounded-3xl">
+            <div className="h-[37vh] m-1 mt-2 backdrop-blur-3xl bg-white/20 rounded-3xl flex items-center justify-center overflow-hidden">
                 <Weather location={location} />
             </div>
         </div>

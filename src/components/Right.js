@@ -1,4 +1,5 @@
 import AirConditioner from "./AirConditioner";
+import Electricity from "./Electricity";
 import BgTwo from "./styled-components/BgTwo";
 
 
@@ -12,7 +13,7 @@ const Right = () => {
         <div></div>
         <AirConditioner />
         <BgTwo className="h-[28vh] mt-2">
-            <h1 className="">Electric Usage</h1>
+            <Electricity  />
         </BgTwo>
         </div>
     )
