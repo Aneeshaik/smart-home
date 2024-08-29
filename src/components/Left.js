@@ -31,7 +31,7 @@ const Left = () => {
             <div className="">
                 <News />
             </div>
-            <div className="box-border backdrop-blur-3xl bg-white/20 rounded-3xl">
+            <div className="backdrop-blur-3xl bg-white/20 rounded-3xl">
                 <Weather location={location} />
             </div>
         </div>
