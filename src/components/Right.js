@@ -7,8 +7,11 @@ const Right = () => {
       
     return (
         <div className="flex flex-col justify-between h-full">
-        <BgTwo className="p-3">
-            <h1 className="text-left">Alerts</h1>
+        <BgTwo className="p-2 text-left flex flex-col justify-between space-y-2">
+            <h1 className="m-1 opacity-75">Alerts</h1>
+            <div className="m-1">
+                <h1 className="text-red-500">A/c has turned on!</h1>
+            </div>
         </BgTwo> 
         <BgTwo>
             <AirConditioner />

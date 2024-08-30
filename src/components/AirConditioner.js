@@ -7,12 +7,21 @@ import fanIcon from "../assets/images/fan-icon.svg"
 import timerIcon from "../assets/images/timer-icon.svg"
 import normalIcon from "../assets/images/normal-icon.svg"
 import { useState } from "react"
-// import heatIcon from "../assets/images/heat-icon.svg"
-// import coolIcon from "../assets/images/cool-icon.svg"
+import heatIcon from "../assets/images/heat-icon.svg"
+import coolIcon from "../assets/images/cool-icon.svg"
 
 const AirConditioner = () => {
     const [value, setValue] = useState(20);
     const [control, setControl] = useState(false);
+    const [fanSpeed, setFanSpeed] = useState("Fan");
+    const [timer, setTimer] = useState("Timer");
+    const speeds = ["Slow", "Med", "Fast"]
+    const times = ["2 hrs", "5 hrs", "8 hrs", "Off"]
+    const [mode, setMode] = useState("Mode");
+    const modes = ["Cool", "Heat"];
+    const [icon, setIcon] = useState(normalIcon)
+    const icons = [coolIcon, heatIcon]
+ 
     const handleIncrement = () => {
         if(value < 34){
             setValue(value + 1);
@@ -31,7 +40,38 @@ const AirConditioner = () => {
     const calcColor = (value, min, max) => {
         const ratio = (value - min) / (max - min);
         return `hsl(${ratio * 120}, 100%, 50%)`; // Generates a color based on the value.
-      };
+    };
+    const handleFanSpeed = () => {
+        if(fanSpeed === "Fan Speed"){
+            setFanSpeed("Slow")
+        } else {
+            const curInd = speeds.indexOf(fanSpeed);
+            const nexInd = (curInd + 1) % speeds.length;
+            setFanSpeed(speeds[nexInd])
+        }
+    }
+    const handleTimer = () => {
+        if(timer === "Timer"){
+            setTimer("2 hrs")
+        } else {
+            const curInd = times.indexOf(timer);
+            const nexInd = (curInd + 1) % times.length;
+            setTimer(times[nexInd])
+        }
+    }
+    const handleMode = () => {
+        if(mode === "Mode"){
+            setMode("Cool")
+            setIcon(coolIcon)
+        } else {
+            const curMode = modes.indexOf(mode)
+            const nexMode = (curMode + 1) % modes.length;
+            // const curIcon = icons.indexOf(icon)
+            // const nexIcon = (curIcon + 1) % icons.length
+            setMode(modes[nexMode])
+            setIcon(icons[nexMode])
+        }
+    }
 
     return (
         <div className="p-2">
@@ -44,7 +84,7 @@ const AirConditioner = () => {
                 <img className="cursor-pointer" src={powerIcon} alt="power-icon" />
                 </button>
             </div>
-            <div className="flex">
+            <div className="flex justify-between">
             <div className="m-3">
             <div className="relative w-56 h-56 mx-auto">
                 <CircularProgressbar
@@ -82,23 +122,19 @@ const AirConditioner = () => {
                         </button>
                     </div>
             </div>
-            {/* <div className="flex justify-between mx-12 mt-[-40px]">
-                <button className="cursor-pointer"><img onClick={handledecrement} className="p-2 rounded-full bg-slate-300 cursor-pointer" src={minusIcon} alt="minus" /></button>
-                <img onClick={handleIncrement} className="p-2 rounded-full bg-slate-300 cursor-pointer" src={plusIcon} alt="plus" />
-            </div> */}
             </div>
-            <div className="flex flex-col justify-between my-4">
-                <div className="flex flex-col items-center text-white">
-                    <img className="mb-1" src={fanIcon} alt="fan" />
-                    <h1>Fan Speed</h1>
+            <div className="flex flex-col justify-between my-4 mr-[9px]">
+                <div className="flex flex-col items-center text-white cursor-pointer" onClick={handleFanSpeed}>
+                    <button className="" ><img className="mb-1" src={fanIcon} alt="fan" /></button>
+                        <h1>{fanSpeed}</h1>
                 </div>
-                <div className="flex flex-col items-center text-white">
+                <div className="flex flex-col items-center text-white cursor-pointer" onClick={handleTimer}>
                     <img className="mb-1" src={timerIcon} alt="timer" />
-                    <h1>Timer</h1>
+                    <h1>{timer}</h1>
                 </div>
-                <div className="flex flex-col items-center text-white">
-                    <img className="mb-1" src={normalIcon} alt="normal" />
-                    <h1>Mode</h1>
+                <div className="flex flex-col items-center text-white cursor-pointer" onClick={handleMode}>
+                    <img className="mb-1" src={icon} alt="normal" />
+                    <h1>{mode}</h1>
                 </div>
             </div>
             </div>

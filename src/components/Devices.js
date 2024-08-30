@@ -7,15 +7,18 @@ import cameraIcon from "../assets/images/camera-icon.svg";
 import lightIcon from "../assets/images/light-icon.svg";
 import fanIcon from "../assets/images/fan-grey-icon.svg";
 import tvIcon from "../assets/images/tv-icon.svg";
+import fridgeIcon from "../assets/images/fridge.svg"
+import heaterIcon from "../assets/images/heater.svg"
+import coffeeMakerIcon from "../assets/images/coffee-maker.svg"
 
 const DeviceCard = ({ icon, name, checked, onToggle, isSpeed, speed }) => (
-    <BgTwo className="w-[30%] h-[120px] p-1 flex flex-col items-start justify-between m-1">
+    <BgTwo className={`w-[30%] h-[120px] p-1 flex flex-col items-start justify-between m-1 ${checked ? 'bg-[#3099d6]' : ''}`}>
         <div className="flex justify-between space-x-7 items-center">
             <img className="p-2 bg-white rounded-full scale-75" src={icon} alt={name} />
             {!isSpeed && <span className="opacity-50">{checked ? 'On' : 'Off'}</span>}
         </div>
         <div className="py-1 flex flex-col m-1 space-y-1">
-            <h1>{name}</h1>
+            <h1 className="text-left">{name}</h1>
             {isSpeed ? (
                 <h1 className="text-[11px] opacity-75">{speed} Mbit/s</h1>
             ) : (
@@ -57,22 +60,30 @@ const Devices = () => {
         { icon: lightIcon, name: "Light", checked: true },
         { icon: fanIcon, name: "Fan", checked: true },
         { icon: tvIcon, name: "TV", checked: true },
+        { icon: fridgeIcon, name: "Fridge", checked: true},
+        { icon: heaterIcon, name: "Heater", checked: true},
+        { icon: coffeeMakerIcon, name: "Coffee Maker", checked: true}
     ];
 
-    useEffect(() => {
+    const speedCheck = () => {
         if (navigator.connection) {
             setInternetSpeed(navigator.connection.downlink);
         }
+    }
+
+    useEffect(() => {
+        speedCheck();
+        setInterval(speedCheck, 10 * 60 * 1000);
     }, []);
 
     const toggleDevice = (deviceName) => {
         setDeviceStates((prevStates) => ({
-            // ...prevStates,
+            ...prevStates,
             [deviceName]: !prevStates[deviceName],
         }));
     };
 
-    const hasSixDevices = devices.length === 6;
+    const hasSixDevices = devices.length <= 6;
 
     return (
         <div className={`flex flex-wrap justify-center items-center mx-auto w-full ${
@@ -91,43 +102,6 @@ const Devices = () => {
             />
                 )
             })} 
-            
-            {/* <DeviceCard
-                icon={wifiIcon}
-                name="Internet"
-                isSpeed={true}
-                speed={internetSpeed}
-            />
-            <DeviceCard
-                icon={doorIcon}
-                name="Security"
-                checked={deviceStates.security}
-                onToggle={() => toggleDevice('security')}
-            />
-            <DeviceCard
-                icon={cameraIcon}
-                name="Camera"
-                checked={deviceStates.camera}
-                onToggle={() => toggleDevice('camera')}
-            />
-            <DeviceCard
-                icon={lightIcon}
-                name="Light"
-                checked={deviceStates.light}
-                onToggle={() => toggleDevice('light')}
-            />
-            <DeviceCard
-                icon={fanIcon}
-                name="Fan"
-                checked={deviceStates.fan}
-                onToggle={() => toggleDevice('fan')}
-            />
-            <DeviceCard
-                icon={tvIcon}
-                name="TV"
-                checked={deviceStates.tv}
-                onToggle={() => toggleDevice('tv')}
-            /> */}
         </div>
     );
 };

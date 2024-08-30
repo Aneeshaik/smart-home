@@ -25,7 +25,7 @@ const Time = () => {
 
     return (
         // <div className="backdrop-blur-3xl bg-white/20 relative z-20 rounded-3xl">
-        <div className="relative z-20">
+        <div className="">
             <div className="p-3 flex justify-between">
                 <div className="text-left">
                     <h1 className="font-semibold text-2xl"><span className="text-4xl">{hours}</span> : {minutes}</h1>
