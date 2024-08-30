@@ -67,7 +67,7 @@ const Devices = () => {
 
     const toggleDevice = (deviceName) => {
         setDeviceStates((prevStates) => ({
-            ...prevStates,
+            // ...prevStates,
             [deviceName]: !prevStates[deviceName],
         }));
     };

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import locationIcon from "../assets/images/location-icon.svg"
+import BgTwo from "./styled-components/BgTwo";
 
 const Weather = (props) => {
     const [weatherData, setWeatherData] = useState({});
@@ -93,7 +94,7 @@ const Weather = (props) => {
     },[loading, getTodayForecast, getUpcomingDaysForecasts])
 
 
-    return loading? null : (
+    return loading? <BgTwo></BgTwo> : (
         <div className="weather-div">
         {(todayWeather )&& (upcomingWeather) && (locationData) && (
             <div className="p-3 items-center">
