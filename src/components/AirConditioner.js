@@ -12,6 +12,7 @@ import { useState } from "react"
 
 const AirConditioner = () => {
     const [value, setValue] = useState(20);
+    const [control, setControl] = useState(false);
     const handleIncrement = () => {
         if(value < 34){
             setValue(value + 1);
@@ -22,6 +23,11 @@ const AirConditioner = () => {
             setValue(value - 1);
         }
     }
+    const handleClick = () => {
+        setControl((prevState) => {
+            return !prevState
+        })
+    }
     const calcColor = (value, min, max) => {
         const ratio = (value - min) / (max - min);
         return `hsl(${ratio * 120}, 100%, 50%)`; // Generates a color based on the value.
@@ -31,10 +37,12 @@ const AirConditioner = () => {
         <div className="p-2">
             <div className="flex justify-between m-2">
                 <div className="items-center flex space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full shadow-green-500 shadow-2xl animate-pulse"></div>
+                    <div className={`w-2 h-2 shadow-2xl rounded-full ${control ? 'bg-green-500 shadow-green-500 animate-pulse' : 'bg-red-500 shadow-red-500'}`}></div>
                     <h1 className="text-white">Air Conditioner</h1>
                 </div>
+                <button onClick={handleClick}>
                 <img className="cursor-pointer" src={powerIcon} alt="power-icon" />
+                </button>
             </div>
             <div className="flex">
             <div className="m-3">
@@ -95,7 +103,7 @@ const AirConditioner = () => {
             </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AirConditioner

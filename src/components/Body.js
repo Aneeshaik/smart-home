@@ -28,13 +28,13 @@ const Body = () => {
             <BgOne className="">
                 <Header />
                 <div className="flex items-stretch">
-                    <div className="w-1/3 box-border bg-blue-400">
+                    <div className="w-1/3 box-border">
                         <Left />
                     </div>
-                    <div className="w-1/3 box-border bg-red-400">
+                    <div className="w-1/3 box-border">
                         <Middle />
                     </div>
-                    <div className="w-1/3 box-border bg-blue-400">
+                    <div className="w-1/3 box-border">
                         <Right />
                     </div>
                 </div>
