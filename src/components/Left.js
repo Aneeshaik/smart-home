@@ -2,6 +2,7 @@ import Time from "./Time"
 import { useState, useEffect } from "react";
 import Weather from "./Weather";
 import News from "./News";
+import BgTwo from "./styled-components/BgTwo";
 
 const Left = () => {
     const [location, setLocation] = useState({ lat: null, lon: null });
@@ -24,16 +25,16 @@ const Left = () => {
         }
     }, []);
     return (
-        <div className="">
-            <div className="">
+        <div className="flex flex-col justify-between h-full">
+            <BgTwo>
                 <Time />
-            </div>
-            <div className="">
+            </BgTwo>
+            <BgTwo className="rounded-3xl">
                 <News />
-            </div>
-            <div className="backdrop-blur-3xl bg-white/20 rounded-3xl">
+            </BgTwo>
+            <BgTwo>
                 <Weather location={location} />
-            </div>
+            </BgTwo>
         </div>
     )
 }

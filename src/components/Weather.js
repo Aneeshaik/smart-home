@@ -98,7 +98,7 @@ const Weather = (props) => {
         {(todayWeather )&& (upcomingWeather) && (locationData) && (
             <div className="p-3 items-center">
                     <div>
-                        <div className="h-min">
+                        <div className="">
                         <h1 className="text-xl text-left font-semibold">Weather</h1>
                         <div className="flex opacity-50 text-sm ml-[-6px]">
                         <img className="scale-75" src={locationIcon} alt="location"/>

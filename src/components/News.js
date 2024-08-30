@@ -1,7 +1,6 @@
 // import { useEffect, useState } from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import NewsImage from '../assets/images/news-image.jpeg';
-import BgTwo from './styled-components/BgTwo';
 
 const News = () => {
     // const [newsData, setNewsData] = useState([]);
@@ -22,10 +21,9 @@ const News = () => {
     // }
 
   return (
-        <BgTwo className=''>
           <Carousel className="w-full" controls={false} indicators={false}>
             <Carousel.Item interval={1000}>
-              <div className="relative w-full h-[150px] rounded-3xl">
+              <div className="relative w-full h-[150px]">
                 <img
                   src={NewsImage}
                   alt="news-image"
@@ -64,10 +62,6 @@ const News = () => {
               </div>
             </Carousel.Item>
           </Carousel>
-        </BgTwo>
-
-
-
   );
 }
 

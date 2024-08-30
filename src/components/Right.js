@@ -6,14 +6,14 @@ import BgTwo from "./styled-components/BgTwo";
 const Right = () => {
       
     return (
-        <div className="">
-        <div className="backdrop-blur-3xl p-3 bg-white/20 rounded-3xl text-white">
+        <div className="flex flex-col justify-between h-full">
+        <BgTwo className="p-3">
             <h1 className="text-left">Alerts</h1>
-        </div>
-        <div className="">
-        <AirConditioner />
-        </div>
-        <BgTwo className="">
+        </BgTwo> 
+        <BgTwo>
+            <AirConditioner />
+        </BgTwo>
+        <BgTwo>
             <Electricity  />
         </BgTwo>
         </div>

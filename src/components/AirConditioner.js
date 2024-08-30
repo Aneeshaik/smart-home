@@ -6,7 +6,6 @@ import minusIcon from "../assets/images/minus-icon.svg"
 import fanIcon from "../assets/images/fan-icon.svg"
 import timerIcon from "../assets/images/timer-icon.svg"
 import normalIcon from "../assets/images/normal-icon.svg"
-import BgTwo from "./styled-components/BgTwo"
 import { useState } from "react"
 // import heatIcon from "../assets/images/heat-icon.svg"
 // import coolIcon from "../assets/images/cool-icon.svg"
@@ -29,7 +28,7 @@ const AirConditioner = () => {
       };
 
     return (
-        <BgTwo className="p-2">
+        <div className="p-2">
             <div className="flex justify-between m-2">
                 <div className="items-center flex space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full shadow-green-500 shadow-2xl animate-pulse"></div>
@@ -95,7 +94,7 @@ const AirConditioner = () => {
                 </div>
             </div>
             </div>
-        </BgTwo>
+        </div>
     )
 }
 

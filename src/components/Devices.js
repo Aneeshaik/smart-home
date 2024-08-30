@@ -22,7 +22,7 @@ const Devices = () => {
     };
     return (
         <div className="flex flex-wrap justify-center items-center mx-auto w-full">
-        <BgTwo className="w-[31%] h-[120px] p-1 flex flex-col items-start justify-between m-1">
+        <BgTwo className="w-[30%] h-[120px] p-1 flex flex-col items-start justify-between m-1">
             <img className="p-2 bg-white rounded-full scale-75" src={wifiIcon} alt="wifi" />
             <div className="p-2 text-left"> 
                 <h1 className="font-medium">Internet</h1>
