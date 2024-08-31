@@ -11,8 +11,8 @@ import fridgeIcon from "../assets/images/fridge.svg"
 import heaterIcon from "../assets/images/heater.svg"
 import coffeeMakerIcon from "../assets/images/coffee-maker.svg"
 
-const DeviceCard = ({ icon, name, checked, onToggle, isSpeed, speed }) => (
-    <BgTwo className={`w-[30%] h-[120px] p-1 flex flex-col items-start justify-between m-1 ${checked ? 'bg-[#319bd9]' : ''}`}>
+const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, className }) => (
+    <BgTwo className={`w-[30%] h-[120px] p-1 flex flex-col items-start justify-between m-1 ${className}`}>
         <div className="flex justify-between space-x-7 items-center">
             <img className="p-2 bg-white rounded-full scale-75" src={icon} alt={name} />
             {!isSpeed && <span className="opacity-50">{checked ? 'On' : 'Off'}</span>}
@@ -99,6 +99,7 @@ const Devices = () => {
                 speed={device.isSpeed ? internetSpeed : null}
                 checked={deviceStates[device.name.toLowerCase()]}
                 onToggle={() => toggleDevice(device.name.toLowerCase())}
+                className={deviceStates[device.name.toLowerCase()] ? 'bg-[#3495de]' : ''}
             />
                 )
             })} 
