@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from "react";
 import Switch from "react-switch";
-import BgTwo from "./styled-components/BgTwo";
 import wifiIcon from "../assets/images/wifi-icon.svg";
 import doorIcon from "../assets/images/door-icon.svg";
 import cameraIcon from "../assets/images/camera-icon.svg";
@@ -12,7 +11,7 @@ import heaterIcon from "../assets/images/heater.svg"
 import coffeeMakerIcon from "../assets/images/coffee-maker.svg"
 
 const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, className }) => (
-    <BgTwo className={`w-[30%] h-[120px] p-1 flex flex-col items-start justify-between m-1 ${className}`}>
+    <div className={`backdrop-blur-3xl m-1 rounded-3xl w-[30%] h-[120px] p-1 flex flex-col items-start justify-between ${className}`}>
         <div className="flex justify-between space-x-7 items-center">
             <img className="p-2 bg-white rounded-full scale-75" src={icon} alt={name} />
             {!isSpeed && <span className="opacity-50">{checked ? 'On' : 'Off'}</span>}
@@ -41,7 +40,7 @@ const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, cla
                 </div>
             )}
         </div>
-    </BgTwo>
+    </div>
 );
 
 const Devices = () => {
@@ -52,17 +51,20 @@ const Devices = () => {
         light: false,
         fan: false,
         tv: false,
+        fridge: false,
+        heater: false,
+        coffeemaker: false,
     });
     const devices = [
         { icon: wifiIcon, name: "Internet", isSpeed: true },
-        { icon: doorIcon, name: "Security", checked: true },
-        { icon: cameraIcon, name: "Camera", checked: true },
-        { icon: lightIcon, name: "Light", checked: true },
-        { icon: fanIcon, name: "Fan", checked: true },
-        { icon: tvIcon, name: "TV", checked: true },
-        { icon: fridgeIcon, name: "Fridge", checked: true},
-        { icon: heaterIcon, name: "Heater", checked: true},
-        { icon: coffeeMakerIcon, name: "Coffee Maker", checked: true}
+        { icon: doorIcon, name: "Security"},
+        { icon: cameraIcon, name: "Camera"},
+        { icon: lightIcon, name: "Light"},
+        { icon: fanIcon, name: "Fan"},
+        { icon: tvIcon, name: "TV"},
+        { icon: fridgeIcon, name: "Fridge"},
+        { icon: heaterIcon, name: "Heater"},
+        { icon: coffeeMakerIcon, name: "Coffee Maker"}
     ];
 
     const speedCheck = () => {
@@ -70,6 +72,10 @@ const Devices = () => {
             setInternetSpeed(navigator.connection.downlink);
         }
     }
+
+    // useEffect(() => {
+    //     localStorage.setItem("deviceStates", JSON.stringify(deviceStates));
+    // }, [deviceStates]);
 
     useEffect(() => {
         speedCheck();
@@ -97,9 +103,9 @@ const Devices = () => {
                 name={device.name}
                 isSpeed={device.isSpeed || false}
                 speed={device.isSpeed ? internetSpeed : null}
-                checked={deviceStates[device.name.toLowerCase()]}
-                onToggle={() => toggleDevice(device.name.toLowerCase())}
-                className={deviceStates[device.name.toLowerCase()] ? 'bg-[#3495de]' : ''}
+                checked={deviceStates[device.name.toLowerCase().replace(/\s+/g, '')]}
+                onToggle={() => toggleDevice(device.name.toLowerCase().replace(/\s+/g, ''))}
+                className={deviceStates[device.name.toLowerCase().replace(/\s+/g, '')] ? 'bg-[#3495de]' : 'bg-white/20'}
             />
                 )
             })} 
