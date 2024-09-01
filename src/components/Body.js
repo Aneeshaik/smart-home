@@ -3,7 +3,6 @@ import Right from "./Right";
 import Left from "./Left";
 import Middle from "./Middle";
 import BgOne from "./styled-components/BgOne";
-import FetchbackEnd from "./FetchbackEnd";
 
 const Body = () => {
     return(
@@ -22,7 +21,6 @@ const Body = () => {
                     </div>
                 </div>
             </BgOne>
-            <FetchbackEnd />
         </div>
 
 

@@ -11,6 +11,7 @@ import heaterIcon from "../assets/images/heater.svg"
 import coffeeMakerIcon from "../assets/images/coffee-maker.svg"
 
 const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, className }) => (
+
     <div className={`backdrop-blur-3xl m-1 rounded-3xl w-[30%] h-[120px] p-1 flex flex-col items-start justify-between ${className}`}>
         <div className="flex justify-between space-x-7 items-center">
             <img className="p-2 bg-white rounded-full scale-75" src={icon} alt={name} />
@@ -45,6 +46,7 @@ const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, cla
 
 const Devices = () => {
     const [internetSpeed, setInternetSpeed] = useState(null);
+    const [mockData, setMockData] = useState();
     const [deviceStates, setDeviceStates] = useState({
         security: false,
         camera: false,
@@ -72,6 +74,18 @@ const Devices = () => {
             setInternetSpeed(navigator.connection.downlink);
         }
     }
+
+    const fetchData = async() => {
+        const response = await fetch('http://localhost:5000/api/devices')
+        if(response.ok){
+            const data = await response.json();
+            setMockData(data);
+            console.log(mockData);
+        }
+    }
+    useEffect(() => {
+        fetchData();
+    })
 
     // useEffect(() => {
     //     localStorage.setItem("deviceStates", JSON.stringify(deviceStates));
