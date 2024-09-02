@@ -102,7 +102,7 @@ const Devices = () => {
                 return (
                 <DeviceCard
                 key={index}
-                icon={`http://localhost:5000/test-image/${device.icon}`}
+                icon={`http://localhost:5000/images/${device.icon}`}
                 name={device.name}
                 isSpeed={device.isSpeed || false}
                 speed={device.isSpeed ? internetSpeed : null}
