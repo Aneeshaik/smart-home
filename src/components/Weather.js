@@ -82,7 +82,7 @@ const Weather = (props) => {
 
     useEffect(() => { 
         fetchData();
-        console.log(location);
+        // console.log(location);
         setInterval(fetchData, 10 * 60 * 1000)
     },[fetchData, locationData, location])
 

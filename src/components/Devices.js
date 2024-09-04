@@ -37,16 +37,6 @@ const Devices = () => {
     const [internetSpeed, setInternetSpeed] = useState(null);
     const [mockData, setMockData] = useState();
     const [hasSixDevices, setHasSixDevices] = useState(false)
-    const [deviceStates, setDeviceStates] = useState({
-        security: false,
-        camera: false,
-        light: false,
-        fan: false,
-        tv: false,
-        fridge: false,
-        heater: false,
-        coffeemaker: false,
-    });
 
     const speedCheck = () => {
         if (navigator.connection) {
@@ -59,7 +49,6 @@ const Devices = () => {
         if(response.ok){
             const data = await response.json();
             setMockData(data);
-            console.log(mockData);
         }
         if(mockData){
             setHasSixDevices(mockData.length <= 5);
@@ -67,22 +56,40 @@ const Devices = () => {
     }
     useEffect(() => {
         fetchData();
+        // console.log(mockData);
     })
-
-    // useEffect(() => {
-    //     localStorage.setItem("deviceStates", JSON.stringify(deviceStates));
-    // }, [deviceStates]);
 
     useEffect(() => {
         speedCheck();
         setInterval(speedCheck, 10 * 60 * 1000);
     }, []);
 
-    const toggleDevice = (deviceName) => {
-        setDeviceStates((prevStates) => ({
-            ...prevStates,
-            [deviceName]: !prevStates[deviceName],
-        }));
+    const toggleDevice = async(index) => {
+        const updatedDevice = { ...mockData[index], status: !mockData[index].status, lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false }) };
+        mockData[index] = updatedDevice;
+        // console.log(updatedDevice);
+        
+        try{
+        const response = await fetch(`http://localhost:5000/api/devices/${updatedDevice._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedDevice),
+        })
+        // console.log(response);
+        
+        if(!response.ok) throw new Error(`Error updating device status: ${response.statusText}`)
+        const updatedDeviceFromBackend = await response.json();
+        // console.log(updatedDeviceFromBackend);
+        mockData[index] = updatedDeviceFromBackend;
+        
+        setMockData([...mockData]);
+        }
+        catch(error){
+            console.error('Error updating device status:', error);
+            // Handle error gracefully, e.g., show an error message to the user
+        };
     };
 
     return mockData && (
@@ -106,9 +113,9 @@ const Devices = () => {
                 name={device.name}
                 isSpeed={device.isSpeed || false}
                 speed={device.isSpeed ? internetSpeed : null}
-                checked={deviceStates[device.name.toLowerCase().replace(/\s+/g, '')]}
-                onToggle={() => toggleDevice(device.name.toLowerCase().replace(/\s+/g, ''))}
-                className={deviceStates[device.name.toLowerCase().replace(/\s+/g, '')] ? 'bg-[#3495de]' : 'bg-white/20'}
+                checked={device.status}
+                onToggle={() => toggleDevice(index)}
+                className={device.status ? 'bg-[#3495de]' : 'bg-white/20'}
             />
                 )
             })} 
