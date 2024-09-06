@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 
 const Registration = () => {
@@ -7,12 +8,27 @@ const Registration = () => {
         email: '',
         password: '',
     });
+    const [isOpen, setIsOpen] = useState(false);
+    useEffect(() => {
+        setIsOpen(true);
+    }, [])
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: [e.target.value]
         })
     }
+    const handleSubmit = async () => {
+        const response = await fetch('http://localhost:5000/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        const data = await response.json();
+    }
+    if(!isOpen) return null;
     return (
         <div>
             <form>
