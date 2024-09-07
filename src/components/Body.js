@@ -9,17 +9,15 @@ import { useEffect, useState } from "react";
 const Body = () => {
     const [isRegistered, setIsRegistered] = useState(false);
     useEffect(() => {
-        const checkLoginStatus = async() => {
-            try{
-                const response = await fetch('http://localhost:5000/authcheck')
-                const data = await response.json();
-                setIsRegistered(data.isRegistered)
-            }
-            catch(error){
-                console.log("Error");
-            }
+        const storedToken = localStorage.getItem("token");
+        if (storedToken) {
+          setIsRegistered(true);
         }
-     })
+      }, []);
+    
+      const handleRegistrationSuccess = () => {
+        setIsRegistered(true);
+      };
  
     return(
         <div className="flex items-center justify-center min-h-screen text-white">
@@ -39,7 +37,7 @@ const Body = () => {
                     </div>
                 </div>
                 </div> ) : (
-                    <Registration />
+                    <Registration onSuccessfullRegistration = {handleRegistrationSuccess} />
                 )
             }
             </BgOne>
