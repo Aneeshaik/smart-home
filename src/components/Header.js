@@ -1,4 +1,7 @@
 const Header = () => {
+    const fetch = () => {
+        const response = fetch()
+    }
     return (
             <div className="flex justify-between items-center">
                     <h1 className="text-left text-white font-semibold text-3xl m-2">Hey Anees!</h1>

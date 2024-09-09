@@ -8,16 +8,40 @@ import { useEffect, useState } from "react";
 
 const Body = () => {
     const [isRegistered, setIsRegistered] = useState(false);
-    useEffect(() => {
+    const [isLoading, setIsLoading] = useState(true)
+    const checkValidation = async() => {
         const storedToken = localStorage.getItem("token");
+        // console.log(storedToken);
+        
         if (storedToken) {
-          setIsRegistered(true);
+            try{
+                const response = await fetch('http://localhost:5000/auth/check', {
+                    headers:{
+                        'Authorization': `Bearer ${storedToken}`
+                    }
+                })
+                // console.log(response);
+                if(response.ok) setIsRegistered(true);
+                else{
+                    localStorage.removeItem('token');
+                    setIsRegistered(false);
+                }
+            } catch(error) {
+                localStorage.removeItem('token');
+                setIsRegistered(false)
+            }
+        } else {
+            setIsRegistered(false);
         }
+        setIsLoading(false);
+    }
+    useEffect(() => {
+        checkValidation();
       }, []);
     
-      const handleRegistrationSuccess = () => {
-        setIsRegistered(true);
-      };
+      if(isLoading){
+        return <div>Loading....</div>
+      }
  
     return(
         <div className="flex items-center justify-center min-h-screen text-white">
@@ -37,7 +61,7 @@ const Body = () => {
                     </div>
                 </div>
                 </div> ) : (
-                    <Registration onSuccessfullRegistration = {handleRegistrationSuccess} />
+                    <Registration onSuccessfullRegistration = {checkValidation} />
                 )
             }
             </BgOne>
