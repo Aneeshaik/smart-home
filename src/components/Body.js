@@ -3,7 +3,7 @@ import Right from "./Right";
 import Left from "./Left";
 import Middle from "./Middle";
 import BgOne from "./styled-components/BgOne";
-import Registration from "./Registration";
+import SignUp from "./SignUp";
 import { useEffect, useState } from "react";
 
 const Body = () => {
@@ -61,7 +61,7 @@ const Body = () => {
                     </div>
                 </div>
                 </div> ) : (
-                    <Registration onSuccessfullRegistration = {checkValidation} />
+                    <SignUp onSuccessfullRegistration = {checkValidation} />
                 )
             }
             </BgOne>
