@@ -5,14 +5,21 @@ import closeicon from "../assets/images/close-icon.svg"
 
 const Header = () => {
     const [form, setForm] = useState(false);
-    const rooms = ['Living room',
+    const [roomName, setRoomName] = useState();
+    const [rooms, setRooms] = useState(['Living room',
         'Bed room',
         'Kitchen',
-        'Bathroom',
-        'Room 1',
-        'Room 2']
+        'Bathroom',])
     const handleClick = () => {
         setForm(!form);
+    }
+    const handleRoomName = (name) => {
+        setRoomName(name)
+    }
+    const handleAddButton = () => {
+        setRooms([...rooms, roomName])
+        setRoomName('')
+        setForm(!form)
     }
         return (
             <div className="flex justify-between items-center">
@@ -32,7 +39,7 @@ const Header = () => {
                     </li>
                 </ul>
                 {form && (
-                    <BgOne className="fixed z-50 top-0 left-0 w-full h-full flex justify-center items-center">
+                    <BgOne className="fixed z-20 top-0 left-0 w-full h-full flex justify-center items-center">
                     <div className="p-4 rounded-lg">
                     <img
                         className="absolute top-0 right-0 m-2 cursor-pointer hover:opacity-75 active:scale-90"
@@ -40,7 +47,7 @@ const Header = () => {
                         alt="close-icon"
                         onClick={handleClick} // Add onClick handler to close the form
                         />
-                        <Form />
+                        <Form roomName = {handleRoomName} addButton = {handleAddButton}/>
                     </div>
             </BgOne>
       )}
