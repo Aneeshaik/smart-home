@@ -26,7 +26,7 @@ const Left = () => {
     }, []);
     return (
         <div className="flex flex-col justify-between h-full">
-            <BgTwo className="relative z-50">
+            <BgTwo className="relative z-10">
                 <Time />
             </BgTwo>
             <BgTwo className="rounded-3xl">
