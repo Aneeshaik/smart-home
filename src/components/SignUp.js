@@ -47,6 +47,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
             console.log("Login Successful from frontend:", data);
             // console.log(data.token);
             localStorage.setItem("token", data.token)
+            localStorage.setItem("userId", data.userId)
             onSuccessfullRegistration();
         }
         catch(error){
@@ -76,6 +77,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
             console.log("Registration Successful from frontend:", data);
             // console.log(data.token);
             localStorage.setItem("token", data.token)
+            localStorage.setItem("userId", data.userId)
             onSuccessfullRegistration();
         }
         catch(error){

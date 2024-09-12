@@ -30,7 +30,7 @@ const Left = () => {
                 <Time />
             </BgTwo>
             <BgTwo className="rounded-3xl">
-                <News />
+                <News className="rounded-3xl"/>
             </BgTwo>
             <BgTwo>
                 <Weather location={location} />
