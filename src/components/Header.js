@@ -10,6 +10,7 @@ const Header = () => {
         'Bed room',
         'Kitchen',
         'Bathroom',])
+    const [newRooms, setNewRooms] = useState([])
     const handleClick = () => {
         setForm(!form);
     }
@@ -18,6 +19,7 @@ const Header = () => {
     }
     const handleAddButton = () => {
         setRooms([...rooms, roomName])
+        setNewRooms([...newRooms, roomName])
         setRoomName('')
         setForm(!form)
     }
@@ -28,12 +30,6 @@ const Header = () => {
                 {rooms.map((room, index) => (
                     <li key={index}>{room}</li>
                 ))}
-                    {/* <li>Living room</li>
-                    <li>Bed room</li>
-                    <li>Kitchen</li>
-                    <li>Bathroom</li>
-                    <li>Room 1</li>
-                    <li>Room 2</li> */}
                     <li>
                         <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0]  shadow-md shadow-slate-800 px-2 py-1 rounded-2xl hover:opacity-80 active:scale-95" onClick={handleClick}>Add room +</button>
                     </li>
@@ -47,7 +43,7 @@ const Header = () => {
                         alt="close-icon"
                         onClick={handleClick} // Add onClick handler to close the form
                         />
-                        <Form roomName = {handleRoomName} addButton = {handleAddButton}/>
+                        <Form roomName = {handleRoomName} addButton = {handleAddButton} newRooms = {newRooms}/>
                     </div>
             </BgOne>
       )}

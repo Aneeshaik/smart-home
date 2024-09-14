@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 // import BgOne from "./styled-components/BgOne"
 
-const Form = ({roomName, addButton}) => {
-    const [localRoomName, setLocalRoomName] = useState();
-    const [newRooms, setNewRooms] = useState([])
-    const [user, setUser] = useState();
+const Form = ({roomName, addButton, newRooms}) => {
+    const [localRoomName, setLocalRoomName] = useState('');
+    const [user, setUser] = useState('');
     const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker']
     const [addedDevices, setAddedDevices] = useState([]);
     const [isChecked, setIsChecked] = useState({
@@ -35,10 +34,20 @@ const Form = ({roomName, addButton}) => {
         setLocalRoomName(newRoom)
         roomName(newRoom)
     }
-    const handleClick = async () => {
-        if(localRoomName){
+    const handleClick = () => {
+        if(localRoomName.trim()){
+            console.log(localRoomName);
+            const updatedRooms = [...newRooms, localRoomName]
+            console.log(newRooms);
             addButton()
-            setNewRooms(prevRooms => [...prevRooms, localRoomName])
+            postRooms(updatedRooms);
+        } else {
+            alert('Please enter a room name')
+        }
+    }
+
+    const postRooms = async(rooms) => {
+        if(user && rooms.length > 0){
             const response = await fetch('http://localhost:5000/house', {
                 method: 'POST',
                 headers: {
@@ -46,7 +55,7 @@ const Form = ({roomName, addButton}) => {
                 },
                 body: JSON.stringify({
                     userName: user,
-                    rooms: newRooms.map((room) => ({
+                    rooms: rooms.map((room) => ({
                         roomName: room,
                         devices: addedDevices.map((device, deviceIndex) => ({
                                 id: deviceIndex,
@@ -55,23 +64,10 @@ const Form = ({roomName, addButton}) => {
                                 status: false
                         }))
                     })),
-                    // rooms: [
-                    //     {
-                    //         roomName: localRoomName,
-                    //         devices: addedDevices.map((device, index) => ({
-                    //             id: index,
-                    //             icon: device,
-                    //             name: device,
-                    //             status: false
-                    //         }))
-                    //     }
-                    // ]
                 })
             })
             const data = await response.json()
             console.log("Successfully added in database", data)
-        } else {
-            alert('Please enter a room name')
         }
     }
 
@@ -79,11 +75,11 @@ const Form = ({roomName, addButton}) => {
         const getUserName = async () => {
             const response = await fetch(`http://localhost:5000/users/${localStorage.getItem('userId')}`);
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             setUser(data.firstName);
         }
         getUserName();
-    })
+    },[])
 
     return (
         <div className="backdrop-blur-3xl p-3 rounded-3xl bg-black/50">
