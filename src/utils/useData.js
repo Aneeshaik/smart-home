@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 const useData = () => {
-    const [data, setData] = useState(null);
+    const [houseData, setHouseData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const getData = useCallback( async() => {
@@ -10,7 +10,7 @@ const useData = () => {
                 throw new Error('Network response was not ok');
             }
             const jsonData = await response.json();
-            setData(jsonData);
+            setHouseData(jsonData);
         } catch(error){
             console.error(error);
             setError(error)
@@ -22,7 +22,7 @@ const useData = () => {
         getData();
     },[getData])
     // console.log(data);
-    return {data, loading, error, refetchData: getData};
+    return {houseData, loading, error, refetchData: getData};
 }
 
 export default useData;

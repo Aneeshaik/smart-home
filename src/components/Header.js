@@ -8,7 +8,7 @@ import useData from "../utils/useData";
 const Header = () => {
     const [form, setForm] = useState(false);
     const [roomList, setRoomList] = useState([]);
-    const {data, loading, error, refetchData} = useData()
+    const {houseData, loading, error, refetchData} = useData()
     const handleClick = () => {
         setForm(!form);
     }
@@ -17,11 +17,11 @@ const Header = () => {
         setForm(!form)
     }
     useEffect(() => {
-        if(data){
-            setRoomList(data[0]?.rooms || [])
+        if(houseData){
+            setRoomList(houseData[0]?.rooms || [])
         }
-    },[data])
-    console.log(data);
+    },[houseData])
+    // console.log(houseData);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -31,7 +31,7 @@ const Header = () => {
                 <h1 className="text-left text-white font-semibold text-3xl m-2">Hey Anees!</h1>
                 <ul className="backdrop-blur-3xl bg-white/20 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
                 {roomList.map((room, index) => (
-                    <li key={index}>{room.roomName}</li>
+                    <Link to={`/rooms/${room._id}`} key={index}>{room.roomName}</Link>
                 ))}
                     <li>
                         <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0]  shadow-md shadow-slate-800 px-2 py-1 rounded-2xl hover:opacity-80 active:scale-95" onClick={handleClick}>Add room +</button>
