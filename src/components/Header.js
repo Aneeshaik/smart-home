@@ -1,32 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BgOne from "./styled-components/BgOne";
 import Form from "./Form";
+import { Link } from "react-router-dom";
 import closeicon from "../assets/images/close-icon.svg"
+import useData from "../utils/useData";
 
 const Header = () => {
     const [form, setForm] = useState(false);
-    const [roomName, setRoomName] = useState();
-    const [rooms, setRooms] = useState(['Living room',
-        'Bed room',
-        'Kitchen',
-        'Bathroom',])
+    const [roomList, setRoomList] = useState([]);
+    const {data, loading, error, refetchData} = useData()
     const handleClick = () => {
         setForm(!form);
     }
-    const handleRoomName = (name) => {
-        setRoomName(name)
-    }
-    const handleAddButton = () => {
-        setRooms([...rooms, roomName])
-        setRoomName('')
+    const handleAddButton = async() => {
+        await refetchData()
         setForm(!form)
     }
+    useEffect(() => {
+        if(data){
+            setRoomList(data[0]?.rooms || [])
+        }
+    },[data])
+    console.log(data);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+    
         return (
             <div className="flex justify-between items-center">
                 <h1 className="text-left text-white font-semibold text-3xl m-2">Hey Anees!</h1>
                 <ul className="backdrop-blur-3xl bg-white/20 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
-                {rooms.map((room, index) => (
-                    <li key={index}>{room}</li>
+                {roomList.map((room, index) => (
+                    <li key={index}>{room.roomName}</li>
                 ))}
                     <li>
                         <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0]  shadow-md shadow-slate-800 px-2 py-1 rounded-2xl hover:opacity-80 active:scale-95" onClick={handleClick}>Add room +</button>
@@ -41,7 +46,8 @@ const Header = () => {
                         alt="close-icon"
                         onClick={handleClick} // Add onClick handler to close the form
                         />
-                        <Form roomName = {handleRoomName} addButton = {handleAddButton}/>
+                        {/* <Form roomName = {handleRoomName} addButton = {handleAddButton}/> */}
+                        <Form addButton = {handleAddButton}/>
                     </div>
             </BgOne>
       )}
