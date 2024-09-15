@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import BgOne from "./styled-components/BgOne"
 
-const Form = ({roomName, addButton, newRooms}) => {
+const Form = ({roomName, addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
     const [user, setUser] = useState('');
     const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker']
@@ -37,17 +37,15 @@ const Form = ({roomName, addButton, newRooms}) => {
     const handleClick = () => {
         if(localRoomName.trim()){
             console.log(localRoomName);
-            const updatedRooms = [...newRooms, localRoomName]
-            console.log(newRooms);
             addButton()
-            postRooms(updatedRooms);
+            postRooms(localRoomName);
         } else {
             alert('Please enter a room name')
         }
     }
 
-    const postRooms = async(rooms) => {
-        if(user && rooms.length > 0){
+    const postRooms = async(localRoomName) => {
+        if(user && localRoomName){
             const response = await fetch('http://localhost:5000/house', {
                 method: 'POST',
                 headers: {
@@ -55,21 +53,46 @@ const Form = ({roomName, addButton, newRooms}) => {
                 },
                 body: JSON.stringify({
                     userName: user,
-                    rooms: rooms.map((room) => ({
-                        roomName: room,
+                    room: {
+                        roomName: localRoomName,
                         devices: addedDevices.map((device, deviceIndex) => ({
                                 id: deviceIndex,
                                 icon: device,
                                 name: device,
                                 status: false
                         }))
-                    })),
+                    }
                 })
             })
             const data = await response.json()
             console.log("Successfully added in database", data)
         }
     }
+
+    // const postRooms = async(rooms) => {
+    //     if(user && rooms.length > 0){
+    //         const response = await fetch('http://localhost:5000/house', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 userName: user,
+    //                 rooms: rooms.map((room) => ({
+    //                     roomName: room,
+    //                     devices: addedDevices.map((device, deviceIndex) => ({
+    //                             id: deviceIndex,
+    //                             icon: device,
+    //                             name: device,
+    //                             status: false
+    //                     }))
+    //                 })),
+    //             })
+    //         })
+    //         const data = await response.json()
+    //         console.log("Successfully added in database", data)
+    //     }
+    // }
 
     useEffect(() => {
         const getUserName = async () => {

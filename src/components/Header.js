@@ -10,7 +10,6 @@ const Header = () => {
         'Bed room',
         'Kitchen',
         'Bathroom',])
-    const [newRooms, setNewRooms] = useState([])
     const handleClick = () => {
         setForm(!form);
     }
@@ -19,7 +18,6 @@ const Header = () => {
     }
     const handleAddButton = () => {
         setRooms([...rooms, roomName])
-        setNewRooms([...newRooms, roomName])
         setRoomName('')
         setForm(!form)
     }
@@ -43,7 +41,7 @@ const Header = () => {
                         alt="close-icon"
                         onClick={handleClick} // Add onClick handler to close the form
                         />
-                        <Form roomName = {handleRoomName} addButton = {handleAddButton} newRooms = {newRooms}/>
+                        <Form roomName = {handleRoomName} addButton = {handleAddButton}/>
                     </div>
             </BgOne>
       )}
