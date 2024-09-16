@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 const useData = () => {
     const [houseData, setHouseData] = useState([]);
+    const [roomData, setRoomData] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const getData = useCallback( async() => {
+        // console.log("get data called");
+        
         try{
             const response = await fetch('http://localhost:5000/house');
             if(!response.ok){
@@ -18,11 +21,13 @@ const useData = () => {
             setLoading(false)
         }
     },[])
+    setRoomData(houseData[0].rooms);
     useEffect(() => {
+        // console.log("get effect");
         getData();
     },[getData])
     // console.log(data);
-    return {houseData, loading, error, refetchData: getData};
+    return {houseData, roomData, loading, error, refetchData: getData};
 }
 
 export default useData;

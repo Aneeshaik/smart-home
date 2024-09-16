@@ -1,21 +1,35 @@
 import { useEffect, useState } from "react";
 import BgOne from "./styled-components/BgOne";
 import Form from "./Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import closeicon from "../assets/images/close-icon.svg"
 import useData from "../utils/useData";
 
 const Header = () => {
     const [form, setForm] = useState(false);
+    const [dataUpdated, setDataUpdated] = useState(false)
+    const navigate = useNavigate();
+    const [id,  setId] = useState(null);
     const [roomList, setRoomList] = useState([]);
     const {houseData, loading, error, refetchData} = useData()
     const handleClick = () => {
         setForm(!form);
     }
-    const handleAddButton = async() => {
-        await refetchData()
-        setForm(!form)
-    }
+    const handleAddButton = async (roomId) => {
+        await refetchData();
+        // console.log("Before navigate", houseData);
+        setId(roomId)
+        setDataUpdated(true);
+        setForm(!form);
+    };
+
+    useEffect(() => {
+        if (dataUpdated && id) {
+            navigate(`/rooms/${id}`);
+            setDataUpdated(false); // Reset the state
+        }
+    }, [dataUpdated, houseData, id, navigate]);
+
     useEffect(() => {
         if(houseData){
             setRoomList(houseData[0]?.rooms || [])
@@ -50,8 +64,8 @@ const Header = () => {
                         <Form addButton = {handleAddButton}/>
                     </div>
             </BgOne>
-      )}
-            </div>
+        )}
+        </div>
     )
 }
 

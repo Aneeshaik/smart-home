@@ -5,75 +5,89 @@ import Header from "./Header"
 import Left from "./Left"
 import Middle from "./Middle"
 import Right from "./Right"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import Form from "./Form"
 
 const RoomDetail = () => {
     const { id } = useParams()
-    const {houseData, loading, error} = useData();
-    const [devices, setDevices] = useState(null);
-    console.log(id);
-    useEffect(() => {
-        const fetchDevices = () => {
-            if (loading) {
-                console.log("Data is loading...");
-                return;
-            }
+    // const [roomData, setRoomData] = useState([])
+    const {roomData, loading, error} = useData();
+    const [devices, setDevices] = useState([]);
+    console.log("Room Data:",roomData);
+    
 
-            if (error) {
-                console.error("Error fetching data:", error);
+    useEffect(() => {
+        const fetchDevices = async() => {
+            // console.log("Effect Called");
+            if(roomData){
+                console.log(roomData);
+            }
+            
+            if(!id){
                 return;
             }
-            if (!houseData || !Array.isArray(houseData) || houseData.length === 0) {
+            // await refetchData(); 
+            if (!roomData || !Array.isArray(roomData) || roomData.length === 0) {
                 console.log("House data is undefined or empty.");
                 return;
             }
-            console.log(houseData);
-            console.log(houseData[0].rooms);
-            const room = houseData[0].rooms.find(room => room._id === id)
-            // console.log(room);
+            // console.log(roomData);
+            // console.log(houseData);
+            // console.log(houseData[0].rooms);
+            const room = roomData.find(room => room._id === id)
+            console.log(room);
             if(room){
-                console.log(room.devices);
+                // console.log(room.devices);
                 setDevices(room.devices)
             } else {
                 console.log("Room not found");
             }
         }
         fetchDevices();
-    },[houseData, loading, error, id])
+    },[roomData, id])
+
+    // useEffect(() => {
+    //     console.log('House data:', houseData);
+    // }, [houseData]);
+    
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>
+    }
 
     if(devices === null){
         return <div>Loading...</div>
     }
     
     return(
-        <div className="flex items-center justify-center min-h-screen text-white">
-            <BgOne className="">
-                <div>
-                <Header />
-                <div className="flex items-stretch">
-                    <div className="w-1/3 box-border">
-                        <Left />
-                    </div>
-                    {/* <div className="w-1/3 box-border">
-                        <Middle />
-                    </div> */}
-                    <div className="w-1/3 box-border">
-                        <ul>
-                        {devices.length > 0? (
-                            devices.map((device, index) => (
-                                <li key={index}>{device.name}</li>
-                            ))
-                        ) : (
-                            <div>No devices found</div>
-                        )}
-                        </ul>
-                    </div>
-                    <div className="w-1/3 box-border">
-                        <Right />
-                    </div>
+        <div>
+            <Header />
+            <div className="flex items-stretch">
+                <div className="w-1/3 box-border">
+                    <Left />
                 </div>
+                {/* <div className="w-1/3 box-border">
+                    <Middle />
+                </div> */}
+                <div className="w-1/3 box-border">
+                    <ul>
+                    {devices.length > 0? (
+                        devices.map((device, index) => (
+                            <li key={index}>{device.name}</li>
+                        ))
+                    ) : (
+                        <div>No devices found</div>
+                    )}
+                    </ul>
                 </div>
-            </BgOne>
+                <div className="w-1/3 box-border">
+                    <Right />
+                </div>
+            </div>
         </div>
     )
 }

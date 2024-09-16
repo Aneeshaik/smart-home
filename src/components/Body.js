@@ -1,10 +1,56 @@
-import Header from "./Header";
-import Right from "./Right";
-import Left from "./Left";
-import Middle from "./Middle";
+// import Header from "./Header";
+// import Right from "./Right";
+// import Left from "./Left";
+// import Middle from "./Middle";
 import BgOne from "./styled-components/BgOne";
 import SignUp from "./SignUp";
+import RoomDetail from "./RoomDetail";
 import { useEffect, useState } from "react";
+import useData from "../utils/useData";
+import Form from "./Form";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import Header from "./Header";
+
+
+const Home = () => {
+    const { houseData, loading, error } = useData();
+    const [shouldRenderForm, serShouldRenderForm] = useState(false)
+    const navigate = useNavigate();
+    useEffect(() => {
+      let isMounted = true;
+      if (loading){
+        console.log("Data is Loading...")
+        return;
+      }
+      if (error){
+        console.log("Error fetching data", error);
+        return;
+      }
+      if(isMounted){
+        if(!houseData || houseData.length === 0 || houseData[0].rooms.length === 0){
+            serShouldRenderForm(true)
+        } else {
+            const roomData = houseData[0].rooms;
+            if(roomData.length > 0){
+                navigate(`/rooms/${roomData[0]._id}`)
+            }
+        }
+      }
+      return () => {
+        isMounted = false;
+      }
+    }, [navigate, houseData, loading, error])
+
+    if(shouldRenderForm){
+        return (
+            <div>
+                <Header />
+            </div>
+        )
+    }
+
+    return <div>Loading....</div>
+  }
 
 const Body = () => {
     const [isRegistered, setIsRegistered] = useState(false);
@@ -48,18 +94,12 @@ const Body = () => {
             <BgOne className="">
             {isRegistered ? (
                 <div>
-                <Header />
-                <div className="flex items-stretch">
-                    <div className="w-1/3 box-border">
-                        <Left />
-                    </div>
-                    <div className="w-1/3 box-border">
-                        <Middle />
-                    </div>
-                    <div className="w-1/3 box-border">
-                        <Right />
-                    </div>
-                </div>
+                <Router>
+                    <Routes>
+                        <Route path="/rooms/:id" element={<RoomDetail />} />
+                        <Route path='/' element={<Home />} />
+                    </Routes>
+                </Router>
                 </div> ) : (
                     <SignUp onSuccessfullRegistration = {checkValidation} />
                 )

@@ -35,9 +35,9 @@ const Form = ({addButton}) => {
     const handleClick = async(e) => {
         e.preventDefault();
         if(localRoomName.trim()){
-            await postRooms(localRoomName);
+            const roomId = await postRooms(localRoomName);
             // console.log(localRoomName);
-            addButton()
+            addButton(roomId)
             setLocalRoomName('')
         } else {
             alert('Please enter a room name')
@@ -64,8 +64,16 @@ const Form = ({addButton}) => {
                     }
                 })
             })
+        if(!response.ok){
+            console.log("failed");
+            
+        }
             const data = await response.json()
             console.log("Successfully added in database", data)
+            console.log(data.house);
+            
+            const roomName = await data?.house?.rooms?.find(room => room.roomName === localRoomName)
+            return roomName?._id
         }
     }
 
