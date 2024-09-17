@@ -7,7 +7,7 @@ import Header from "./Header";
 
 
 const Home = () => {
-    const { houseData, loading, error } = useData();
+    const { userHouseData, loading, error } = useData();
     const [shouldRenderForm, setShouldRenderForm] = useState(false)
     const navigate = useNavigate();
     useEffect(() => {
@@ -23,13 +23,13 @@ const Home = () => {
       console.log("Home Rendered");
       
       if(isMounted){
-        if(!houseData || houseData.length === 0 || houseData[0].rooms.length === 0){
+        if(!userHouseData || userHouseData.length === 0 || userHouseData.rooms.length === 0){
             setShouldRenderForm(true)
             console.log("If rendered");
             
         } 
         else {
-            const roomData = houseData[0].rooms;
+            const roomData = userHouseData?.rooms;
             if(roomData.length > 0){
                 navigate(`/rooms/${roomData[0]._id}`)
             }
@@ -38,7 +38,7 @@ const Home = () => {
       return () => {
         isMounted = false;
       }
-    }, [navigate, houseData, loading, error])
+    }, [navigate, userHouseData, loading, error])
 
     if(shouldRenderForm){
         return (

@@ -11,7 +11,7 @@ const Header = () => {
     const [form, setForm] = useState(false);
     const navigate = useNavigate();
     const [roomList, setRoomList] = useState(null);
-    const {houseData, loading, error, refetchData} = useData()
+    const {userHouseData, loading, error, refetchData} = useData()
 
     const handleClick = () => {
         setForm(!form);
@@ -24,10 +24,14 @@ const Header = () => {
     };
 
     useEffect(() => {
-        if(houseData){
-            setRoomList(houseData[0]?.rooms || [])
+        console.log(userHouseData);
+    },[userHouseData])
+
+    useEffect(() => {
+        if(userHouseData){
+            setRoomList(userHouseData?.rooms || [])
         }
-    },[houseData, id])
+    },[userHouseData, id])
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -60,7 +64,7 @@ const Header = () => {
             </BgOne>
         )}
         </div>
-       { roomList.length > 0 && <RoomDetail id={id} data={houseData}/> }
+       { roomList.length > 0 && <RoomDetail id={id} data={userHouseData}/> }
         </div>
     )
 }

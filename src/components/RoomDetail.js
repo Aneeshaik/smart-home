@@ -11,7 +11,7 @@ const RoomDetail = ({id, data}) => {
 
     useEffect(() => {
         const fetchDevices = async() => {
-            setRoomData(data[0].rooms)
+            setRoomData(data.rooms)
             if(!id){
                 return;
             }

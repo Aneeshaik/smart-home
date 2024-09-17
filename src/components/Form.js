@@ -45,10 +45,12 @@ const Form = ({addButton}) => {
     }
 
     const postRooms = async(localRoomName) => {
+        const token = localStorage.getItem('token');
         if(user && localRoomName){
             const response = await fetch('http://localhost:5000/house', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`, 
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
