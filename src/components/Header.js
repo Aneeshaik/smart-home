@@ -1,47 +1,39 @@
 import { useEffect, useState } from "react";
 import BgOne from "./styled-components/BgOne";
 import Form from "./Form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import closeicon from "../assets/images/close-icon.svg"
 import useData from "../utils/useData";
+import RoomDetail from "./RoomDetail";
 
 const Header = () => {
+    const { id } = useParams()
     const [form, setForm] = useState(false);
-    const [dataUpdated, setDataUpdated] = useState(false)
     const navigate = useNavigate();
-    const [id,  setId] = useState(null);
-    const [roomList, setRoomList] = useState([]);
+    const [roomList, setRoomList] = useState(null);
     const {houseData, loading, error, refetchData} = useData()
     const handleClick = () => {
         setForm(!form);
     }
     const handleAddButton = async (roomId) => {
         await refetchData();
-        // console.log("Before navigate", houseData);
-        setId(roomId)
-        setDataUpdated(true);
+        navigate(`/rooms/${roomId}`)
         setForm(!form);
     };
-
-    useEffect(() => {
-        if (dataUpdated && id) {
-            navigate(`/rooms/${id}`);
-            setDataUpdated(false); // Reset the state
-        }
-    }, [dataUpdated, houseData, id, navigate]);
 
     useEffect(() => {
         if(houseData){
             setRoomList(houseData[0]?.rooms || [])
         }
     },[houseData])
-    // console.log(houseData);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     
         return (
+            <div>
             <div className="flex justify-between items-center">
+                
                 <h1 className="text-left text-white font-semibold text-3xl m-2">Hey Anees!</h1>
                 <ul className="backdrop-blur-3xl bg-white/20 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
                 {roomList.map((room, index) => (
@@ -65,6 +57,8 @@ const Header = () => {
                     </div>
             </BgOne>
         )}
+        </div>
+       { roomList.length > 0 && <RoomDetail id={id} data={houseData}/> }
         </div>
     )
 }

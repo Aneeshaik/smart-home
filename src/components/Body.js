@@ -7,14 +7,14 @@ import SignUp from "./SignUp";
 import RoomDetail from "./RoomDetail";
 import { useEffect, useState } from "react";
 import useData from "../utils/useData";
-import Form from "./Form";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./Header";
+import OneRoom from "./OneRoom";
 
 
 const Home = () => {
     const { houseData, loading, error } = useData();
-    const [shouldRenderForm, serShouldRenderForm] = useState(false)
+    const [shouldRenderForm, setShouldRenderForm] = useState(false)
     const navigate = useNavigate();
     useEffect(() => {
       let isMounted = true;
@@ -26,10 +26,15 @@ const Home = () => {
         console.log("Error fetching data", error);
         return;
       }
+      console.log("Home Rendered");
+      
       if(isMounted){
         if(!houseData || houseData.length === 0 || houseData[0].rooms.length === 0){
-            serShouldRenderForm(true)
-        } else {
+            setShouldRenderForm(true)
+            console.log("If rendered");
+            
+        } 
+        else {
             const roomData = houseData[0].rooms;
             if(roomData.length > 0){
                 navigate(`/rooms/${roomData[0]._id}`)
@@ -96,7 +101,7 @@ const Body = () => {
                 <div>
                 <Router>
                     <Routes>
-                        <Route path="/rooms/:id" element={<RoomDetail />} />
+                        <Route path="/rooms/:id" element={<Header />} />
                         <Route path='/' element={<Home />} />
                     </Routes>
                 </Router>

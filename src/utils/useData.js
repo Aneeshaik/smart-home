@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 const useData = () => {
     const [houseData, setHouseData] = useState([]);
-    const [roomData, setRoomData] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const getData = useCallback( async() => {
@@ -21,13 +20,12 @@ const useData = () => {
             setLoading(false)
         }
     },[])
-    setRoomData(houseData[0].rooms);
     useEffect(() => {
         // console.log("get effect");
         getData();
     },[getData])
     // console.log(data);
-    return {houseData, roomData, loading, error, refetchData: getData};
+    return {houseData, loading, error, refetchData: getData};
 }
 
 export default useData;
