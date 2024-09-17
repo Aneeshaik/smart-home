@@ -33,7 +33,7 @@ const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, cla
     </div>
 );
 
-const Devices = () => {
+const Devices = ({devices}) => {
     const [internetSpeed, setInternetSpeed] = useState(null);
     const [mockData, setMockData] = useState();
     const [hasSixDevices, setHasSixDevices] = useState(false)
@@ -105,7 +105,7 @@ const Devices = () => {
                 <h1 className="text-[11px] opacity-75">{internetSpeed} Mbit/s</h1>
             </div>
         </BgTwo>
-            {mockData.map((device, index) => {
+            {devices.map((device, index) => {
                 return (
                 <DeviceCard
                 key={index}

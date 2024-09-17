@@ -12,9 +12,11 @@ const Header = () => {
     const navigate = useNavigate();
     const [roomList, setRoomList] = useState(null);
     const {houseData, loading, error, refetchData} = useData()
+
     const handleClick = () => {
         setForm(!form);
     }
+
     const handleAddButton = async (roomId) => {
         await refetchData();
         navigate(`/rooms/${roomId}`)
@@ -25,7 +27,7 @@ const Header = () => {
         if(houseData){
             setRoomList(houseData[0]?.rooms || [])
         }
-    },[houseData])
+    },[houseData, id])
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -37,7 +39,7 @@ const Header = () => {
                 <h1 className="text-left text-white font-semibold text-3xl m-2">Hey Anees!</h1>
                 <ul className="backdrop-blur-3xl bg-white/20 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
                 {roomList.map((room, index) => (
-                    <Link to={`/rooms/${room._id}`} key={index}>{room.roomName}</Link>
+                    <Link to={`/rooms/${room._id}`} className={`${room._id === id? 'opacity-100 border-b-2 shadow-md scale-105' : 'opacity-50'} rounded-3xl py-1 px-2`} key={index}>{room.roomName}</Link>
                 ))}
                     <li>
                         <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0]  shadow-md shadow-slate-800 px-2 py-1 rounded-2xl hover:opacity-80 active:scale-95" onClick={handleClick}>Add room +</button>

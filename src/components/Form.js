@@ -4,14 +4,14 @@ const Form = ({addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
     const [user, setUser] = useState('');
     const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker']
-    const [addedDevices, setAddedDevices] = useState([]);
+    const [addedDevices, setAddedDevices] = useState(['Security', 'Camera']);
     const [isChecked, setIsChecked] = useState({
-        light: false,
-        fan: false,
-        tV: false,
-        fridge: false,
-        heater: false,
-        coffeeMaker: false
+        Light: false,
+        Fan: false,
+        TV: false,
+        Fridge: false,
+        Heater: false,
+        'Coffee Maker': false
     });
     const handleCheckbox = (name) => {
         setIsChecked((prevStates) => {
@@ -57,7 +57,7 @@ const Form = ({addButton}) => {
                         roomName: localRoomName,
                         devices: addedDevices.map((device, deviceIndex) => ({
                                 id: deviceIndex,
-                                icon: device,
+                                icon: device.toLowerCase().replace(/\s+/g, "") + ".svg",
                                 name: device,
                                 status: false
                         }))
@@ -100,8 +100,8 @@ const Form = ({addButton}) => {
                     return (
                         <div key={index} className="flex items-center space-x-1">
                             <input type="checkbox" className={`appearance-none w-3 h-3 
-                                border-2 ${isChecked[device.toLocaleLowerCase().replace(/\s+/g, "")]? 'bg-blue-800' : 'bg-white'} rounded-full border-grey-400 
-                                cursor-pointer`} name="checkbox" onClick={() =>handleCheckbox(device.toLowerCase().replace(/\s+/g, ""))}/>
+                                border-2 ${isChecked[device]? 'bg-blue-800' : 'bg-white'} rounded-full border-grey-400 
+                                cursor-pointer`} name="checkbox" onChange={() =>handleCheckbox(device)}/>
                             <label htmlFor="checkbox" className="text-base">{device}</label>
                     </div>
                     )

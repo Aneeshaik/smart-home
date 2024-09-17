@@ -1,12 +1,13 @@
 import Left from "./Left"
 import Right from "./Right"
+import Middle from "./Middle"
 import { useEffect, useState } from "react"
 
 const RoomDetail = ({id, data}) => {
     const [roomData, setRoomData] = useState([])
     const [devices, setDevices] = useState([]);
-    console.log(data);
-    console.log(id);
+    // console.log(data);
+    // console.log(id);
 
     useEffect(() => {
         const fetchDevices = async() => {
@@ -37,19 +38,8 @@ const RoomDetail = ({id, data}) => {
                 <div className="w-1/3 box-border">
                     <Left />
                 </div>
-                {/* <div className="w-1/3 box-border">
-                    <Middle />
-                </div> */}
                 <div className="w-1/3 box-border">
-                    <ul>
-                    {devices.length > 0? (
-                        devices.map((device, index) => (
-                            <li key={index}>{device.name}</li>
-                        ))
-                    ) : (
-                        <div>No devices found</div>
-                    )}
-                    </ul>
+                    <Middle devices = {devices}/>
                 </div>
                 <div className="w-1/3 box-border">
                     <Right />

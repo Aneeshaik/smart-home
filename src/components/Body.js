@@ -1,15 +1,9 @@
-// import Header from "./Header";
-// import Right from "./Right";
-// import Left from "./Left";
-// import Middle from "./Middle";
 import BgOne from "./styled-components/BgOne";
 import SignUp from "./SignUp";
-import RoomDetail from "./RoomDetail";
 import { useEffect, useState } from "react";
 import useData from "../utils/useData";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import OneRoom from "./OneRoom";
 
 
 const Home = () => {
