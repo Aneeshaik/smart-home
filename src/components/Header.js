@@ -64,7 +64,7 @@ const Header = () => {
             </BgOne>
         )}
         </div>
-       { roomList.length > 0 && <RoomDetail id={id} data={userHouseData}/> }
+       { roomList.length > 0 && <RoomDetail id={id} data={userHouseData} houseId={userHouseData._id}/> }
         </div>
     )
 }

@@ -33,9 +33,9 @@ const DeviceCard = ({ icon, name, checked = false, onToggle, isSpeed, speed, cla
     </div>
 );
 
-const Devices = ({devices}) => {
+const Devices = ({devices, houseId, roomId}) => {
+    const [devicesData, setDevicesData] = useState(devices)
     const [internetSpeed, setInternetSpeed] = useState(null);
-    const [mockData, setMockData] = useState();
     const [hasSixDevices, setHasSixDevices] = useState(false)
 
     const speedCheck = () => {
@@ -43,21 +43,19 @@ const Devices = ({devices}) => {
             setInternetSpeed(navigator.connection.downlink);
         }
     }
-
-    const fetchData = async() => {
-        const response = await fetch('http://localhost:5000/api/devices')
-        if(response.ok){
-            const data = await response.json();
-            setMockData(data);
-        }
-        if(mockData){
-            setHasSixDevices(mockData.length <= 5);
-        }
-    }
+    
     useEffect(() => {
-        fetchData();
-        // console.log(mockData);
-    })
+        if(devicesData){
+            setHasSixDevices(devicesData.length <= 5);
+        }
+        console.log(devices);
+        
+    },[devicesData, devices])
+
+    useEffect(() => {
+        setDevicesData(devices);  // Update devicesData when devices prop changes
+    }, [devices]);
+
 
     useEffect(() => {
         speedCheck();
@@ -65,26 +63,27 @@ const Devices = ({devices}) => {
     }, []);
 
     const toggleDevice = async(index) => {
-        const updatedDevice = { ...mockData[index], status: !mockData[index].status, lastUpdated: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false }) };
-        mockData[index] = updatedDevice;
-        // console.log(updatedDevice);
+        const updatedDevice = { ...devicesData[index], status: !devicesData[index].status, lastUpdated: new Date()}
+        devicesData[index] = updatedDevice;
+        console.log(updatedDevice);
         
         try{
-        const response = await fetch(`http://localhost:5000/api/devices/${updatedDevice._id}`, {
+        const response = await fetch(`http://localhost:5000/houses/${houseId}/rooms/${roomId}/devices/${updatedDevice._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(updatedDevice),
         })
-        // console.log(response);
+        console.log(response);
         
         if(!response.ok) throw new Error(`Error updating device status: ${response.statusText}`)
         const updatedDeviceFromBackend = await response.json();
         // console.log(updatedDeviceFromBackend);
-        mockData[index] = updatedDeviceFromBackend;
-        
-        setMockData([...mockData]);
+        // devicesData[index] = updatedDeviceFromBackend;
+        devicesData[index] = updatedDeviceFromBackend
+
+        setDevicesData([...devicesData])
         }
         catch(error){
             console.error('Error updating device status:', error);
@@ -92,7 +91,7 @@ const Devices = ({devices}) => {
         };
     };
 
-    return mockData && (
+    return devicesData && (
         <div className={`flex flex-wrap justify-center items-center mx-auto w-full ${
             hasSixDevices ? 'gap-y-8' : ''
         }`}>
@@ -105,7 +104,7 @@ const Devices = ({devices}) => {
                 <h1 className="text-[11px] opacity-75">{internetSpeed} Mbit/s</h1>
             </div>
         </BgTwo>
-            {devices.map((device, index) => {
+            {devicesData.map((device, index) => {
                 return (
                 <DeviceCard
                 key={index}

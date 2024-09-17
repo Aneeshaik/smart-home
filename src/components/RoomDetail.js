@@ -3,15 +3,21 @@ import Right from "./Right"
 import Middle from "./Middle"
 import { useEffect, useState } from "react"
 
-const RoomDetail = ({id, data}) => {
+const RoomDetail = ({id, data, houseId}) => {
     const [roomData, setRoomData] = useState([])
     const [devices, setDevices] = useState([]);
+    const [currentRoom, setCurrentRoom] = useState()
     // console.log(data);
     // console.log(id);
 
     useEffect(() => {
-        const fetchDevices = async() => {
+        if(data && data.rooms){
             setRoomData(data.rooms)
+        }
+    },[data])
+
+    useEffect(() => {
+        const fetchDevices = async() => {
             if(!id){
                 return;
             }
@@ -21,6 +27,7 @@ const RoomDetail = ({id, data}) => {
             }
             const room = roomData.find(room => room._id === id)
             if(room){
+                setCurrentRoom(room)
                 setDevices(room.devices)
             } else {
                 console.log("Room not found");
@@ -39,8 +46,9 @@ const RoomDetail = ({id, data}) => {
                     <Left />
                 </div>
                 <div className="w-1/3 box-border">
-                    <Middle devices = {devices}/>
+                    <Middle devices = {devices} houseId={houseId} roomId={currentRoom?._id}/>
                 </div>
+                {/* {console.log(currentRoom._id)} */}
                 <div className="w-1/3 box-border">
                     <Right />
                 </div>
