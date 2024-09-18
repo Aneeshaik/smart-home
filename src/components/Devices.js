@@ -48,7 +48,7 @@ const Devices = ({devices, houseId, roomId}) => {
         if(devicesData){
             setHasSixDevices(devicesData.length <= 5);
         }
-        console.log(devices);
+        // console.log(devices);
         
     },[devicesData, devices])
 
@@ -65,7 +65,7 @@ const Devices = ({devices, houseId, roomId}) => {
     const toggleDevice = async(index) => {
         const updatedDevice = { ...devicesData[index], status: !devicesData[index].status, lastUpdated: new Date()}
         devicesData[index] = updatedDevice;
-        console.log(updatedDevice);
+        // console.log(updatedDevice);
         
         try{
         const response = await fetch(`http://localhost:5000/houses/${houseId}/rooms/${roomId}/devices/${updatedDevice._id}`, {
@@ -75,21 +75,31 @@ const Devices = ({devices, houseId, roomId}) => {
             },
             body: JSON.stringify(updatedDevice),
         })
-        console.log(response);
+        // console.log(response);
         
         if(!response.ok) throw new Error(`Error updating device status: ${response.statusText}`)
         const updatedDeviceFromBackend = await response.json();
-        // console.log(updatedDeviceFromBackend);
+        console.log("Data from backend:",updatedDeviceFromBackend);
         // devicesData[index] = updatedDeviceFromBackend;
         devicesData[index] = updatedDeviceFromBackend
 
-        setDevicesData([...devicesData])
+        const newDevicesData = devicesData.map((device, i) => 
+            i === index ? updatedDeviceFromBackend : device
+        );
+
+        setDevicesData(newDevicesData);
+        // console.log(devicesData);
+        
         }
         catch(error){
             console.error('Error updating device status:', error);
             // Handle error gracefully, e.g., show an error message to the user
         };
     };
+
+    useEffect(() => {
+        console.log('Devices Data Updated:', devicesData);
+    }, [devicesData]);
 
     return devicesData && (
         <div className={`flex flex-wrap justify-center items-center mx-auto w-full ${

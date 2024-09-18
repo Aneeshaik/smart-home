@@ -8,6 +8,7 @@ import RoomDetail from "./RoomDetail";
 
 const Header = () => {
     const { id } = useParams()
+    const [user, setUser] = useState()
     const [form, setForm] = useState(false);
     const navigate = useNavigate();
     const [roomList, setRoomList] = useState(null);
@@ -22,6 +23,16 @@ const Header = () => {
         navigate(`/rooms/${roomId}`)
         setForm(!form);
     };
+
+    useEffect(() => {
+        const getUserName = async () => {
+            const response = await fetch(`http://localhost:5000/users/${localStorage.getItem('userId')}`);
+            const data = await response.json();
+            // console.log(data);
+            setUser(data.firstName);
+        }
+        getUserName();
+    },[])
 
     useEffect(() => {
         console.log(userHouseData);
@@ -40,7 +51,7 @@ const Header = () => {
             <div>
             <div className="flex justify-between items-center">
                 
-                <h1 className="text-left text-white font-semibold text-3xl m-2">Hey Anees!</h1>
+                <h1 className="text-left text-white font-semibold text-3xl m-2">Hey {user}!</h1>
                 <ul className="backdrop-blur-3xl bg-white/20 flex w-max m-2 p-2 font-medium rounded-3xl space-x-6 items-center text-white">
                 {roomList.map((room, index) => (
                     <Link to={`/rooms/${room._id}`} className={`${room._id === id? 'opacity-100 border-b-2 shadow-md scale-105' : 'opacity-50'} rounded-3xl py-1 px-2`} key={index}>{room.roomName}</Link>
