@@ -4,7 +4,10 @@ import BgTwo from "./styled-components/BgTwo";
 const Form = ({addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
     const [suggestions, setSuggestions] = useState([])
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [ac, setAc] = useState(false)
+    const [selectOption, setSelectedOption] = useState('Select an option')
     const [user, setUser] = useState('');
     const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker'];
     const rooms = useMemo(() => {
@@ -56,6 +59,15 @@ const Form = ({addButton}) => {
         }
     }
 
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen)
+    }
+
+    const handleSelectOption = (option) => {
+        setSelectedOption(option);
+        setDropdownOpen(false);
+    }
+
     const postRooms = async(localRoomName) => {
         const token = localStorage.getItem('token');
         if(user && localRoomName){
@@ -69,6 +81,7 @@ const Form = ({addButton}) => {
                     userName: user,
                     room: {
                         roomName: localRoomName,
+                        aC: ac,
                         devices: addedDevices.map((device, deviceIndex) => ({
                                 id: deviceIndex,
                                 icon: device.toLowerCase().replace(/\s+/g, "") + ".svg",
@@ -113,12 +126,12 @@ const Form = ({addButton}) => {
                     <label className="mb-1 text-lg" htmlFor="room-name">Name of the Room:</label>
                     <input className="rounded-lg w-80 border-2 p-2 bg-transparent focus:outline-none" onClick={() => setShowSuggestions(true)} onChange={handleChange} value={localRoomName} type="text" name="room-name" placeholder="Enter name of the room"/>
                     {suggestions && showSuggestions && (
-                    <ul className="mt-2 border-2 rounded-lg w-80 absolute top-full bg-black/80">
+                    <ul className="mt-2 border-2 z-20 rounded-lg w-80 absolute top-full bg-black/80">
                     {suggestions.map((suggestion, index) => (
                         <li onMouseOver={() => setLocalRoomName(suggestion)}
                             onMouseOut={() => setLocalRoomName("")}
                             key={index} 
-                            className="p-2 cursor-pointer hover:bg-blue-500 rounded-lg"
+                            className="p-2 m-1 cursor-pointer hover:bg-blue-500 rounded-lg"
                             onClick={() => {
                                 setLocalRoomName(suggestion)
                                 setShowSuggestions(false)
@@ -143,8 +156,26 @@ const Form = ({addButton}) => {
                     )
                 })}
                 </div>
+                <div className="flex items-center space-x-2 m-2 mb-3">
+                    <p className="text-lg">Looking to stay cool? </p>
+                    <div className="relative border rounded-lg w-48 z-10">
+                        <button type="button" className="w-48 p-1" onClick={toggleDropdown}>{selectOption}</button>
+                        {dropdownOpen && (
+                            <ul className="absolute bg-black/50 border cursor-pointer mt-1 w-full rounded-lg left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                <li className="hover:bg-blue-500 rounded-lg p-1 m-1" onClick={() => {
+                                    handleSelectOption('Add an A/c!')
+                                    setAc(true)
+                                }}>Add an A/c!</li>
+                                <li className="hover:bg-blue-500 rounded-lg p-1 m-1" onClick={() => {
+                                    handleSelectOption('Enjoy the natural breeze!')
+                                    setAc(false)
+                                }}>Enjoy the natural breeze!</li>
+                            </ul>
+                        )}
+                    </div>
+                </div>
                 <div>
-                    <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0] px-3 py-1 rounded-3xl hover:opacity-85 active:scale-95" type="submit">Add</button>
+                    <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0] px-4 py-1 rounded-3xl hover:opacity-85 text-lg active:scale-95" type="submit">Add</button>
                 </div>
             </div>
         </div> 
