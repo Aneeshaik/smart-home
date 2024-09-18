@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import BgTwo from "./styled-components/BgTwo";
 
 const Form = ({addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
+    const [suggestions, setSuggestions] = useState([])
+    const [showSuggestions, setShowSuggestions] = useState(false);
     const [user, setUser] = useState('');
-    const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker']
+    const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker'];
+    const rooms = useMemo(() => {
+        return ['Living Room', 'Bed Room', 'Kitchen Room', 'Dininng Room', 'Study Room']
+    }, []) 
     const [addedDevices, setAddedDevices] = useState(['Security', 'Camera']);
     const [isChecked, setIsChecked] = useState({
         Light: false,
@@ -31,6 +37,12 @@ const Form = ({addButton}) => {
     const handleChange = (e) => {
         const newRoom = e.target.value
         setLocalRoomName(newRoom)
+        if(newRoom){
+            const filteredSuggestions = rooms.filter(room => room.toLowerCase().includes(newRoom.toLowerCase()))
+            setSuggestions(filteredSuggestions)
+        } else {
+            setSuggestions(rooms);
+        }
     }
     const handleClick = async(e) => {
         e.preventDefault();
@@ -80,6 +92,10 @@ const Form = ({addButton}) => {
     }
 
     useEffect(() => {
+        setSuggestions(rooms);
+    }, [rooms])
+
+    useEffect(() => {
         const getUserName = async () => {
             const response = await fetch(`http://localhost:5000/users/${localStorage.getItem('userId')}`);
             const data = await response.json();
@@ -93,11 +109,29 @@ const Form = ({addButton}) => {
         <form onSubmit={handleClick}>
         <div className="backdrop-blur-3xl p-3 rounded-3xl bg-black/50">
             <div className="flex flex-col items-center">
-                <div className="m-2 flex justify-center flex-col items-start">
+                <div className="m-2 flex justify-center flex-col items-start relative">
                     <label className="mb-1 text-lg" htmlFor="room-name">Name of the Room:</label>
-                    <input className="rounded-lg w-80 border-2 p-2 bg-transparent focus:outline-none" onChange={handleChange} value={localRoomName} type="text" name="room-name" placeholder="Enter name of the room"/>
+                    <input className="rounded-lg w-80 border-2 p-2 bg-transparent focus:outline-none" onClick={() => setShowSuggestions(true)} onChange={handleChange} value={localRoomName} type="text" name="room-name" placeholder="Enter name of the room"/>
+                    {suggestions && showSuggestions && (
+                    <ul className="mt-2 border-2 rounded-lg w-80 absolute top-full bg-black/80">
+                    {suggestions.map((suggestion, index) => (
+                        <li onMouseOver={() => setLocalRoomName(suggestion)}
+                            onMouseOut={() => setLocalRoomName("")}
+                            key={index} 
+                            className="p-2 cursor-pointer hover:bg-blue-500 rounded-lg"
+                            onClick={() => {
+                                setLocalRoomName(suggestion)
+                                setShowSuggestions(false)
+                            }}
+                        >
+                            {suggestion}
+                        </li>
+                    ))}
+                </ul>
+            )}
+
                 </div>
-                <div className="grid grid-cols-3 gap-3 p-2">
+                <div className="grid grid-cols-3 gap-3 p-2" onClick={() => setShowSuggestions(false)}>
                 {devices.map((device, index) => {
                     return (
                         <div key={index} className="flex items-center space-x-1">
