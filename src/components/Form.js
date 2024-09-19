@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import BgTwo from "./styled-components/BgTwo";
 
 const Form = ({addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
@@ -165,11 +164,11 @@ const Form = ({addButton}) => {
                                 <li className="hover:bg-blue-500 rounded-lg p-1 m-1" onClick={() => {
                                     handleSelectOption('Add an A/c!')
                                     setAc(true)
-                                }}>Add an A/c!</li>
+                                }}>Add an A/C</li>
                                 <li className="hover:bg-blue-500 rounded-lg p-1 m-1" onClick={() => {
                                     handleSelectOption('Enjoy the natural breeze!')
                                     setAc(false)
-                                }}>Enjoy the natural breeze!</li>
+                                }}>Enjoy the natural breeze</li>
                             </ul>
                         )}
                     </div>

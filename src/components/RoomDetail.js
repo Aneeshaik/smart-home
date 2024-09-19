@@ -50,7 +50,7 @@ const RoomDetail = ({id, data, houseId}) => {
                 </div>
                 {/* {console.log(currentRoom._id)} */}
                 <div className="w-1/3 box-border">
-                    <Right />
+                    <Right isAc={currentRoom?.aC}/>
                 </div>
             </div>
     )

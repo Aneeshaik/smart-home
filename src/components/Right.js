@@ -3,7 +3,7 @@ import Electricity from "./Electricity";
 import BgTwo from "./styled-components/BgTwo";
 
 
-const Right = () => {
+const Right = ({isAc}) => {
       
     return (
         <div className="flex flex-col justify-between h-full">
@@ -13,8 +13,8 @@ const Right = () => {
                 <h1 className="text-red-500">A/c has turned on!</h1>
             </div>
         </BgTwo> 
-        <BgTwo>
-            <AirConditioner />
+        <BgTwo className = "h-80">
+            <AirConditioner isAc={isAc} />
         </BgTwo>
         <BgTwo>
             <Electricity  />

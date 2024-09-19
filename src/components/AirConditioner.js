@@ -6,11 +6,12 @@ import minusIcon from "../assets/images/minus-icon.svg"
 import fanIcon from "../assets/images/fan-icon.svg"
 import timerIcon from "../assets/images/timer-icon.svg"
 import normalIcon from "../assets/images/normal-icon.svg"
+import errorIcon from "../assets/images/error.svg"
 import { useState } from "react"
 import heatIcon from "../assets/images/heat-icon.svg"
 import coolIcon from "../assets/images/cool-icon.svg"
 
-const AirConditioner = () => {
+const AirConditioner = ({isAc}) => {
     const [value, setValue] = useState(20);
     const [control, setControl] = useState(false);
     const [fanSpeed, setFanSpeed] = useState("Fan");
@@ -74,7 +75,9 @@ const AirConditioner = () => {
     }
 
     return (
-        <div className="p-2">
+        <div className="p-2 h-full flex items-center justify-center">
+            {isAc? (
+            <div className="">
             <div className="flex justify-between m-2">
                 <div className="items-center flex space-x-2">
                     <div className={`w-2 h-2 shadow-2xl rounded-full ${control ? 'bg-green-500 shadow-green-500 animate-pulse' : 'bg-red-500 shadow-red-500'}`}></div>
@@ -138,6 +141,13 @@ const AirConditioner = () => {
                 </div>
             </div>
             </div>
+            </div>
+             ) : (
+                <div className="flex ">
+                    <img className="scale-75" src={errorIcon} alt="err" />
+                    <p>No A/C added in this room</p>
+                </div>
+            )}
         </div>
     );
 };
