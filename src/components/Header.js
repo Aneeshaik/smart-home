@@ -63,14 +63,16 @@ const Header = () => {
                 {form && (
                     <BgOne className="fixed z-20 top-0 left-0 w-full h-full flex justify-center items-center">
                     <div className="p-4 rounded-lg">
+                    { userHouseData?.rooms &&
                     <img
                         className="absolute top-0 right-0 m-2 cursor-pointer hover:opacity-75 active:scale-90"
                         src={closeicon}
                         alt="close-icon"
                         onClick={handleClick} // Add onClick handler to close the form
                         />
+                    }
                         {/* <Form roomName = {handleRoomName} addButton = {handleAddButton}/> */}
-                        <Form addButton = {handleAddButton}/>
+                        <Form handleForm={handleClick} addButton = {handleAddButton}/>
                     </div>
             </BgOne>
         )}

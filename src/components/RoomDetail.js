@@ -46,7 +46,7 @@ const RoomDetail = ({id, data, houseId}) => {
                     <Left />
                 </div>
                 <div className="w-1/3 box-border">
-                    <Middle devices = {devices} houseId={houseId} roomId={currentRoom?._id}/>
+                    <Middle imageURL = {currentRoom?.img} devices = {devices} houseId={houseId} roomId={currentRoom?._id}/>
                 </div>
                 {/* {console.log(currentRoom._id)} */}
                 <div className="w-1/3 box-border">

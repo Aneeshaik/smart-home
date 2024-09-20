@@ -32,7 +32,7 @@ const Left = () => {
             <BgTwo className="rounded-3xl">
                 <News className="rounded-3xl"/>
             </BgTwo>
-            <BgTwo>
+            <BgTwo className="h-[335px]">
                 <Weather location={location} />
             </BgTwo>
         </div>

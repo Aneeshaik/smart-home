@@ -1,16 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
+import useData from "../utils/useData";
+import closeIcon from "../assets/images/close-icon.svg"
 
-const Form = ({addButton}) => {
+const Form = ({handleForm, addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
     const [suggestions, setSuggestions] = useState([])
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [ac, setAc] = useState(false)
+    const {userHouseData} = useData()
     const [selectOption, setSelectedOption] = useState('Select an option')
     const [user, setUser] = useState('');
     const devices = ['Light', 'Fan', 'TV', 'Fridge', 'Heater', 'Coffee Maker'];
     const rooms = useMemo(() => {
-        return ['Living Room', 'Bed Room', 'Kitchen Room', 'Dininng Room', 'Study Room']
+        return ['Living Room', 'Bed Room', 'Kitchen Room', 'Dining Room', 'Study Room']
     }, []) 
     const [addedDevices, setAddedDevices] = useState(['Security', 'Camera']);
     const [isChecked, setIsChecked] = useState({
@@ -81,6 +84,7 @@ const Form = ({addButton}) => {
                     room: {
                         roomName: localRoomName,
                         aC: ac,
+                        img: localRoomName.toLowerCase().replace(/\s+/g, "") + ".jpg",
                         devices: addedDevices.map((device, deviceIndex) => ({
                                 id: deviceIndex,
                                 icon: device.toLowerCase().replace(/\s+/g, "") + ".svg",
@@ -119,7 +123,7 @@ const Form = ({addButton}) => {
 
     return (
         <form onSubmit={handleClick}>
-        <div className="backdrop-blur-3xl p-3 rounded-3xl bg-black/50">
+        <div className={`backdrop-blur-3xl p-3 rounded-3xl ${userHouseData?.rooms ? 'bg-black/50' : 'bg-black'} `}>
             <div className="flex flex-col items-center">
                 <div className="m-2 flex justify-center flex-col items-start relative">
                     <label className="mb-1 text-lg" htmlFor="room-name">Name of the Room:</label>
@@ -177,6 +181,12 @@ const Form = ({addButton}) => {
                     <button className="bg-gradient-to-r from-[#000046] to-[#1CB5E0] px-4 py-1 rounded-3xl hover:opacity-85 text-lg active:scale-95" type="submit">Add</button>
                 </div>
             </div>
+            <img
+                className="absolute top-0 right-0 m-2 cursor-pointer hover:opacity-75 active:scale-90"
+                src={closeIcon}
+                alt="close-icon"
+                onClick={handleForm} // Add onClick handler to close the form
+            />
         </div> 
         </form>   
     )
