@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import useData from "../utils/useData";
 import closeIcon from "../assets/images/close-icon.svg"
+import { toastSuccess, toastWarning } from "../utils/Toast";
 
 const Form = ({handleForm, addButton}) => {
     const [localRoomName, setLocalRoomName] = useState('');
@@ -51,13 +52,18 @@ const Form = ({handleForm, addButton}) => {
     }
     const handleClick = async(e) => {
         e.preventDefault();
-        if(localRoomName.trim()){
+        if(localRoomName.trim() && selectOption !== 'Select an option'){
             const roomId = await postRooms(localRoomName);
             // console.log(localRoomName);
             addButton(roomId)
+            toastSuccess('Added '+ localRoomName)
             setLocalRoomName('')
-        } else {
-            alert('Please enter a room name')
+        } else if(!localRoomName){
+            toastWarning("Please enter your room name")
+            return;
+        } else if(selectOption === 'Select an option'){
+            toastWarning("Please select an option")
+            return;
         }
     }
 

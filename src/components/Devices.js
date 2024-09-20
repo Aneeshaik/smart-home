@@ -97,9 +97,9 @@ const Devices = ({devices, houseId, roomId}) => {
         };
     };
 
-    useEffect(() => {
-        console.log('Devices Data Updated:', devicesData);
-    }, [devicesData]);
+    // useEffect(() => {
+    //     console.log('Devices Data Updated:', devicesData);
+    // }, [devicesData]);
 
     return devicesData && (
         <div className={`flex flex-wrap justify-center items-center mx-auto w-full ${

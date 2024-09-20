@@ -54,7 +54,6 @@ const Home = () => {
 const Body = () => {
     const [isRegistered, setIsRegistered] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
-    const {userHouseData} = useData();
     const checkValidation = async() => {
         const storedToken = localStorage.getItem("token");
         // console.log(storedToken);
@@ -91,7 +90,7 @@ const Body = () => {
  
     return(
         <div className="flex items-center justify-center min-h-screen text-white">
-            <BgOne className={`${!userHouseData?.rooms && 'w-[35%]'}`}>
+            <BgOne>
             {isRegistered ? (
                 <div>
                 <Router>

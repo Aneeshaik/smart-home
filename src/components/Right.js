@@ -10,7 +10,7 @@ const Right = ({isAc}) => {
         <BgTwo className="p-2 text-left flex flex-col justify-between space-y-2">
             <h1 className="m-1 opacity-75">Alerts</h1>
             <div className="m-1">
-                <h1 className="text-red-500">A/c has turned on!</h1>
+                <h1 className="text-red-500">To show alerts!</h1>
             </div>
         </BgTwo> 
         <BgTwo className = "h-80">

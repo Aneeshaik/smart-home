@@ -1,5 +1,6 @@
 import { useState } from "react";
 import image from "../assets/images/loginImage.jpg"
+import { toastSuccess, toastWarning, toastError } from "../utils/Toast";
 
 const SignUp = ({onSuccessfullRegistration}) => {
     const [login, setLogin] = useState(true);
@@ -10,6 +11,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
         password: '',
         confirmPassword: '',
     });
+
     const handleClick = () => {
         setLogin(!login);
         setFormData({
@@ -32,6 +34,12 @@ const SignUp = ({onSuccessfullRegistration}) => {
     }
     const handleSigninSubmit = async(e) => {
         e.preventDefault();
+        if(!formData.email){
+            toastWarning('Please enter your email');
+        }
+        else if(!formData.password){
+            toastWarning('Please enter your password');
+        }
         try{
             const response = await fetch('http://localhost:5000/signin', {
                 method: 'POST',
@@ -43,9 +51,27 @@ const SignUp = ({onSuccessfullRegistration}) => {
                     password: formData.password,
                 }),
             })
+
             const data = await response.json();
-            console.log("Login Successful from frontend:", data);
-            // console.log(data.token);
+            console.log(data.status);
+            
+
+            if (response.ok) {
+                if (response.status === 201) {
+                    toastSuccess(data.message); // Display success toast
+                    console.log("Login Successful from frontend:", data);
+                } else {
+                    toastSuccess("Unexpected success response."); // Handle other success cases
+                }
+            } else {
+                // Handle errors based on response status
+                if (response.status === 401) {
+                    toastError(data.message); // Display error toast
+                    console.log("Failure in logging in:", data);
+                } else {
+                    toastError("An unexpected error occurred."); // Handle other unexpected errors
+                }
+            }
             localStorage.setItem("token", data.token)
             localStorage.setItem("userId", data.userId)
             onSuccessfullRegistration();
@@ -56,8 +82,30 @@ const SignUp = ({onSuccessfullRegistration}) => {
     }
     const handleSignupSubmit = async (e) => {
         e.preventDefault();
+        if(!formData.firstName){
+            toastWarning('Please enter your first name');
+            return;
+        } else if(!formData.lastName){
+            toastWarning('Please enter your last name');
+            return;
+        } else if(!formData.email){
+            toastWarning('Please enter your email');
+            return;
+        } else if(!formData.email.includes("@") || !formData.email.includes(".")){
+            toastWarning("Please enter a valid email");
+            return;
+        } else if(!formData.password){
+            toastWarning('Please enter your password');
+            return;
+        } else if(formData.password.length < 8){
+            toastWarning('Password must be 8 characters');
+            return;
+        } else if(!formData.confirmPassword){
+            toastWarning('Please enter confirm password');
+            return;
+        }
         if(formData.password !== formData.confirmPassword){
-           console.log("Password doesn't match");
+           toastWarning("Password doesn't match");
            return;          
         }
         try{
@@ -75,6 +123,9 @@ const SignUp = ({onSuccessfullRegistration}) => {
             })
             const data = await response.json();
             console.log("Registration Successful from frontend:", data);
+            if(response.ok){
+                toastSuccess(data.message); // Display success toast
+            }
             // console.log(data.token);
             localStorage.setItem("token", data.token)
             localStorage.setItem("userId", data.userId)
@@ -85,6 +136,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
         }
     }
     return (
+        <div>
         <div className="flex">
         <div className="w-1/2">
             <img className="rounded-3xl p-2 border-r-2 border-gray-500 opacity-70" src={image} alt="frame" />
@@ -140,6 +192,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
                 }
                 {/* <p className="m-2">Created a account? <Link to="/signin" onClick={handleClick} className="underline">Sign In</Link></p> */}
             </form>
+        </div>
         </div>
         </div>
     )
