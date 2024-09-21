@@ -13,7 +13,7 @@ const Right = ({isAc}) => {
                 <h1 className="text-red-500">To show alerts!</h1>
             </div>
         </BgTwo> 
-        <BgTwo className = "h-80">
+        <BgTwo className = "h-[335px]">
             <AirConditioner isAc={isAc} />
         </BgTwo>
         <BgTwo>
