@@ -6,7 +6,7 @@ const Middle = ({imageURL, devices, houseId, roomId}) => {
     return (
         <div className="flex flex-col justify-between h-full">
                 <BgTwo className="">
-                    <img className="rounded-3xl p-2" src={imageURL? `http://localhost:5000/images/${imageURL}` : livingRoom} alt={imageURL} />
+                    <img className="rounded-3xl p-2" src={imageURL? `https://smart-home-backend-8s2j.onrender.com/${imageURL}` : livingRoom} alt={imageURL} />
                 </BgTwo>
             <div className="flex-grow flex items-center justify-center">
                 <Devices devices={devices} houseId={houseId} roomId={roomId}/>
