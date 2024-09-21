@@ -79,7 +79,7 @@ const Form = ({handleForm, addButton}) => {
     const postRooms = async(localRoomName) => {
         const token = localStorage.getItem('token');
         if(user && localRoomName){
-            const response = await fetch('http://localhost:5000/house', {
+            const response = await fetch('https://smart-home-backend-8s2j.onrender.com/house', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`, 
@@ -119,7 +119,7 @@ const Form = ({handleForm, addButton}) => {
 
     useEffect(() => {
         const getUserName = async () => {
-            const response = await fetch(`http://localhost:5000/users/${localStorage.getItem('userId')}`);
+            const response = await fetch(`https://smart-home-backend-8s2j.onrender.com/users/${localStorage.getItem('userId')}`);
             const data = await response.json();
             // console.log(data);
             setUser(data.firstName);

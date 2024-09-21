@@ -7,7 +7,7 @@ const useData = () => {
         // console.log("get data called");
         const token = localStorage.getItem('token')
         try{
-            const response = await fetch('http://localhost:5000/house', {
+            const response = await fetch('https://smart-home-backend-8s2j.onrender.com/house', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -17,7 +17,6 @@ const useData = () => {
             }
             const jsonData = await response.json();
             setUserHouseData(jsonData);
-            console.log(userHouseData);
             
         } catch(error){
             console.error(error);

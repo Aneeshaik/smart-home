@@ -60,7 +60,7 @@ const Body = () => {
         
         if (storedToken) {
             try{
-                const response = await fetch('http://localhost:5000/auth/check', {
+                const response = await fetch('https://smart-home-backend-8s2j.onrender.com/auth/check', {
                     headers:{
                         'Authorization': `Bearer ${storedToken}`
                     }

@@ -68,7 +68,7 @@ const Devices = ({devices, houseId, roomId}) => {
         // console.log(updatedDevice);
         
         try{
-        const response = await fetch(`http://localhost:5000/houses/${houseId}/rooms/${roomId}/devices/${updatedDevice._id}`, {
+        const response = await fetch(`https://smart-home-backend-8s2j.onrender.com/houses/${houseId}/rooms/${roomId}/devices/${updatedDevice._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ const Devices = ({devices, houseId, roomId}) => {
                 return (
                 <DeviceCard
                 key={index}
-                icon={`http://localhost:5000/images/${device.icon}`}
+                icon={`https://smart-home-backend-8s2j.onrender.com/images/${device.icon}`}
                 name={device.name}
                 isSpeed={device.isSpeed || false}
                 speed={device.isSpeed ? internetSpeed : null}

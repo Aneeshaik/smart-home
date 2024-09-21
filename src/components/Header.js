@@ -25,7 +25,7 @@ const Header = () => {
 
     useEffect(() => {
         const getUserName = async () => {
-            const response = await fetch(`http://localhost:5000/users/${localStorage.getItem('userId')}`);
+            const response = await fetch(`https://smart-home-backend-8s2j.onrender.com/users/${localStorage.getItem('userId')}`);
             const data = await response.json();
             // console.log(data);
             setUser(data.firstName);

@@ -41,7 +41,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
             toastWarning('Please enter your password');
         }
         try{
-            const response = await fetch('http://localhost:5000/signin', {
+            const response = await fetch('https://smart-home-backend-8s2j.onrender.com/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const SignUp = ({onSuccessfullRegistration}) => {
            return;          
         }
         try{
-            const response = await fetch('http://localhost:5000/signup', {
+            const response = await fetch('https://smart-home-backend-8s2j.onrender.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
