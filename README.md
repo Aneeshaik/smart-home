@@ -21,10 +21,10 @@ This project is a comprehensive smart home system built using the MERN stack (Mo
 * OpenStreetMap API
 * World News API
 ## Contributing
-1. Fork and Clone:
+__1. Fork and Clone:__
 * Fork the repository and clone it to your local machine.
-2. Create a Branch:
+__2. Create a Branch:__
 * Create a new branch for your changes.
-3. Make Changes and Submit:
+__3. Make Changes and Submit:__
 * Commit your changes and push them to your forked repository.
 * Open a pull request on GitHub to submit your changes.
