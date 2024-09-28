@@ -22,9 +22,9 @@ This project is a comprehensive smart home system built using the MERN stack (Mo
 * World News API
 ## Contributing
 __1. Fork and Clone:__
-* Fork the repository and clone it to your local machine.
+* Fork the repository and clone it to your local machine.  
 __2. Create a Branch:__
-* Create a new branch for your changes.
+* Create a new branch for your changes.  
 __3. Make Changes and Submit:__
 * Commit your changes and push them to your forked repository.
-* Open a pull request on GitHub to submit your changes.
+* Open a pull request on GitHub to submit your changes.  
