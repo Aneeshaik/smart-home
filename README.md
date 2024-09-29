@@ -14,6 +14,7 @@ This project is a comprehensive smart home system built using the MERN stack (Mo
 * react-circular-progressbar
 * react-chartjs
 * react-bootstrap
+* react-switch
 * react-calender
 * react-toastify
 ## API's Used
