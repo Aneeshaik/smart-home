@@ -1,5 +1,5 @@
 # Smart Home Project
-This project is a comprehensive smart home system built using the MERN stack (MongoDB, Express.js, React, Node.js). It demonstrates how to create a dynamic web application that allows users to manage and control various aspects of their smart home. This project is designed for educational and practice purposes.
+This project is a comprehensive smart home system built using the MERN stack (MongoDB, Express.js, React, Node.js). It demonstrates how to create a dynamic web application that allows users to manage and control various aspects of their smart home.
 
 <a href="https://raw.githubusercontent.com/Aneeshaik/smart-home/main/smart-home-video.mp4" target="_blank">
     <img src="https://github.com/Aneeshaik/smart-home/blob/main/smart-home.png" alt="Watch the video"/>
